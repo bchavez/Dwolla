@@ -1,1 +1,6 @@
 GitHub-EnableAgent.bat
+syntax: regexp
+(?=_ReSharper).+
+(?=/obj/).+
+(?=/bin/).+
+.+(?=.user)
