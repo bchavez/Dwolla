@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Dwolla.OffSiteGateway;
+using Dwolla.OffSiteGateway.Validators;
 using FluentValidation.Attributes;
 using FluentValidation.TestHelper;
 using NBehave.Spec.NUnit;

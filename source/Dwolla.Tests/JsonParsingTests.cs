@@ -1,3 +1,4 @@
+using Dwolla.OffSiteGateway;
 using NBehave.Spec.NUnit;
 using NUnit.Framework;
 using Newtonsoft.Json;

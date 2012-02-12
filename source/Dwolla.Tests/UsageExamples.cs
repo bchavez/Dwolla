@@ -1,14 +1,13 @@
 using System;
-using NBehave.Spec.NUnit;
+using Dwolla.OffSiteGateway;
 using NUnit.Framework;
 using Newtonsoft.Json;
-using ObjectDumper;
 
-namespace Dwolla.Tests.LiveTests
+namespace Dwolla.Tests
 {
     [TestFixture]
     [Explicit]
-    public class DwollaServerCheckoutApiLiveTests
+    public class UsageExamples
     {
         [Test]
         public void example_checkout_request()

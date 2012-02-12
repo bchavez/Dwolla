@@ -48,10 +48,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DwollaServerCheckoutApi.cs" />
+    <Compile Include="OffSiteGateway\DwollaCallback.cs" />
+    <Compile Include="OffSiteGateway\DwollaCheckoutRequest.cs" />
+    <Compile Include="OffSiteGateway\DwollaCheckoutResponse.cs" />
+    <Compile Include="OffSiteGateway\DwollaOrderItem.cs" />
+    <Compile Include="OffSiteGateway\DwollaPurchaseOrder.cs" />
+    <Compile Include="OffSiteGateway\DwollaServerCheckoutApi.cs" />
     <Compile Include="DwollaSignatureUtil.cs" />
+    <Compile Include="OffSiteGateway\Validators\DwollaCheckoutRequestValidator.cs" />
+    <Compile Include="OffSiteGateway\Validators\DwollaOrderItemValidator.cs" />
+    <Compile Include="OffSiteGateway\Validators\DwollaPurchaseOrderValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators.cs" />
+    <Compile Include="OffSiteGateway\Validators\DwollaCheckoutResponseValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
