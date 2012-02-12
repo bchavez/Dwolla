@@ -21,10 +21,10 @@ Dwolla allows two methods for you initiate payment from your customer (off-site,
 
 Implementers usually chose a single method to initiate payments depending on your development scenario.
 
-Both methods provide options to provide a *Callback URL*. The *Callback URL* is a location on your server where Dwolla will post a JSON object that describes the success or failure of a transaction payment after the user has completed the checkout process.
+Both methods provide options to provide a **Callback URL**. The **Callback URL** is a location on your server where Dwolla will post a JSON object that describes the success or failure of a transaction payment after the user has completed the checkout process.
 
 ----
-#### Initiate by HTML Form Post ####
+#### Initiate Payments by HTML Form Post ####
 When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission. This is how Dwolla verifies the authenticity of the values in the form post.
 
 ```html
@@ -53,7 +53,7 @@ When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature(
 ```
 
 ----
-#### Server-to-Server Checkout Request ####
+#### Initiate Payments by Server-to-Server Checkout Request ####
 The general process of communicating with Dwolla in a Server-to-Server Checkout process involves:
 
 1. Creating a `DwollaCheckoutRequest`.
@@ -98,8 +98,9 @@ else if( checkoutResponse.Result == DwollaCheckoutRequestResult.Success)
 }
 ```
 
-#### Handling Callbacks ####
-After the customer has completed the checkout process Dwolla will POST a JSON callback object to your Callback URL with the results of the payment. Here's how to handle callback communications from Dwolla.
+-------
+#### Handling Callbacks on Your Server ####
+If you've configured a **Callback URL**, generally speaking, you'll want to verify the authenticity of the callback (to ensure there isn't any URL tampering). Here's how to handle callback communications from Dwolla:
 
 ```csharp
 var jsonCallback =
