@@ -15,6 +15,13 @@ Usage
 -----
 ### Off-Site Gateway API ###
 #### Server-to-Server Checkout Request ####
+The general process of communicating with Dwolla in a Server-to-Server Checkout process involves:
+
+1. Creating a `DwollaCheckoutRequest`.
+2. Sending the `DwollaCheckoutRequest` to Dwolla.
+3. Parse the `DwollaCheckoutResponse` and deal with any errors.
+4. Use the `DwollaCheckoutResponse` to generate a Redirect URL for the customer's browser to complete the checkout process.
+
 ```csharp
 var api = new DwollaServerCheckoutApi( appKey:"...", appSecret: "..." );
 
