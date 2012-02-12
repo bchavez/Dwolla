@@ -19,7 +19,7 @@ Dwolla allows two methods for you initiate payment from your customer (off-site,
 * Initiate Payments by HTML Form Post.
 * Initiate Payments by Server-to-Server Communication.
 
-Implementers usually chose a single method to initiate payments depending on your development scenario.
+Implementers usually choose a single method to initiate payments depending on your development scenario.
 
 Both methods provide options to provide a **Callback URL**. The **Callback URL** is a location on your server where Dwolla will post a JSON object that describes the success or failure of a transaction payment after the user has completed the checkout process.
 
