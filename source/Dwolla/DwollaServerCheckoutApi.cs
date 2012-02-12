@@ -1,22 +1,24 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+using System.Net;
 using FluentValidation;
+using FluentValidation.Attributes;
+using RestSharp;
 
 namespace Dwolla
 {
     public class DwollaServerCheckoutApi
     {
-        public bool TestMode { get; private set; }
-        public string AppKey { get; set; }
-        public string AppSecret { get; set; }
+        public virtual IValidatorFactory ValidatorFactory { get; set; }
 
-        private const string BaseUrl = "https://www.dwolla.com/payment/request";
+        public virtual bool TestMode { get; private set; }
+        public virtual string AppKey { get; set; }
+        public virtual string AppSecret { get; set; }
 
+        public const string RequestUrl = "https://www.dwolla.com/payment/request";
+        public const string CheckoutUrl = "https://www.dwolla.com/payment/checkout/{CheckoutId}";
 
         public DwollaServerCheckoutApi() : this( 
             ConfigurationManager.AppSettings["dwolla_key"],
@@ -30,51 +32,63 @@ namespace Dwolla
             this.TestMode = testMode;
             this.AppKey = appKey;
             this.AppSecret = appSecret;
+
+            this.ValidatorFactory = new AttributedValidatorFactory();
         }
 
-        public bool VerifyCallback(DwollaCallback receivedCallback)
+
+        /// <summary>Executes a POST request to the Off-Site Gateway API. </summary>
+        /// <param name="checkoutRequest">A valid Dwolla checkout request.</param>
+        /// <returns>Response by Dwolla. It is the callers responsibility to ensure the return object's Result property is 'Success'</returns>
+        public virtual DwollaCheckoutResponse SendCheckoutRequest( DwollaCheckoutRequest checkoutRequest )
+        {
+            if( string.IsNullOrWhiteSpace(checkoutRequest.Key) )
+                checkoutRequest.Key = this.AppKey;
+            if( string.IsNullOrWhiteSpace(checkoutRequest.Secret))
+                checkoutRequest.Secret = this.AppSecret;
+
+            checkoutRequest.Test = this.TestMode;
+
+            this.ValidatorFactory.GetValidator<DwollaCheckoutRequest>()
+                .ValidateAndThrow( checkoutRequest );
+
+            return ExecuteRestRequest( checkoutRequest );
+        }
+
+        /// <summary>Executes the Dwolla Checkout REST Request. This method can be overridden if you wish to use a different REST library to execute the actual request. </summary>
+        protected virtual DwollaCheckoutResponse ExecuteRestRequest( DwollaCheckoutRequest checkoutRequest)
+        {
+            var client = new RestClient();
+
+            var req = new RestRequest( RequestUrl, Method.POST )
+            {
+                RequestFormat = DataFormat.Json
+            }
+                .AddBody( checkoutRequest );
+
+            var res = client.Execute<DwollaCheckoutResponse>( req );
+
+            if( res.ResponseStatus != ResponseStatus.Completed || res.StatusCode != HttpStatusCode.OK )
+                return new DwollaCheckoutResponse {Result = DwollaCheckoutRequestResult.Failure, Message = "Non HTTP status code received."};
+
+            return res.Data;
+        }
+
+        public virtual string GetCheckoutRedirectUrl(DwollaCheckoutResponse response)
+        {
+            this.ValidatorFactory.GetValidator<DwollaCheckoutResponse>()
+                .ValidateAndThrow( response );
+
+            return CheckoutUrl.Replace( "{CheckoutId}", response.CheckoutId );
+        }
+        
+        public virtual bool VerifyCallbackAuthenticity(DwollaCallback receivedCallback)
         {
             return DwollaSignatureUtil.VerifyCallbackSignature( this.AppSecret, receivedCallback.Signature, receivedCallback.CheckoutId, receivedCallback.Amount );
         }
     }
 
-    public static class DwollaSignatureUtil
-    {
-        public static string GenerateSignature( string appKey, string appSecret, string orderId, DateTime utcTimestamp )
-        {
-            var timestamp = UnixEpochTime( utcTimestamp );
-
-            var signatureData = String.Format( "{0}&{1}&{2}", appKey, timestamp, orderId );
-
-            return GetHMACSHA1InHex( appKey, signatureData );
-        }
-
-        public static bool VerifyCallbackSignature( string appSecret, string callbackSignature, string checkoutId, decimal amount )
-        {
-            var signatureData = String.Format( "{0}&{1}", checkoutId, amount );
-
-            return callbackSignature == GetHMACSHA1InHex( appSecret, signatureData );
-        }
-
-        internal static string GetHMACSHA1InHex(string key, string data )
-        {
-            var hmacKey = Encoding.ASCII.GetBytes( key );
-
-            var signatureStream = new MemoryStream( Encoding.ASCII.GetBytes( data ) );
-
-            var hex = new HMACSHA1( hmacKey ).ComputeHash( signatureStream )
-                .Aggregate( new StringBuilder(), ( sb, b ) => sb.AppendFormat( "{0:x2}", b ), sb => sb.ToString() );
-
-            return hex;
-        }
-
-        public static long UnixEpochTime( DateTime utcTime )
-        {
-            TimeSpan timeDifference = utcTime - new DateTime( 1970, 1, 1, 0, 0, 0, DateTimeKind.Utc );
-            return Convert.ToInt64( timeDifference.TotalSeconds );
-        }
-    }
-
+    [Validator(typeof(DwollaCheckoutRequestValidator))]
     public class DwollaCheckoutRequest
     {
         /// <summary>Consumer key for the application.</summary>
@@ -106,6 +120,31 @@ namespace Dwolla
         public DwollaPurchaseOrder PurchaseOrder { get; set; }
     }
 
+    [Validator( typeof( DwollaCheckoutResponseValidator ) )]
+    public class DwollaCheckoutResponse
+    {
+        public DwollaCheckoutResponse()
+        {
+            //by default, fail.
+            Result = DwollaCheckoutRequestResult.Failure;
+        }
+
+        /// <summary>The result of the checkout request.</summary>
+        public DwollaCheckoutRequestResult Result { get; set; }
+
+        /// <summary>The CheckoutId generated by Dwolla used for a URL redirect.</summary>
+        public string CheckoutId { get; set; }
+
+        /// <summary>The error message if the Result is a Failure.</summary>
+        public string Message { get; set; }
+    }
+    public enum DwollaCheckoutRequestResult
+    {
+        Success = 0x01,
+        Failure
+    }
+
+    [Validator( typeof( DwollaPurchaseOrderValidator ) )]
     public class DwollaPurchaseOrder
     {
         public DwollaPurchaseOrder()
@@ -155,6 +194,7 @@ namespace Dwolla
         public List<DwollaOrderItem> OrderItems { get; protected set; }
     }
 
+    [Validator(typeof(DwollaOrderItemValidator))]
     public class DwollaOrderItem
     {
         /// <summary>Description of the item. Must be 200 characters or less.</summary>

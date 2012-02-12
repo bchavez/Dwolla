@@ -8,24 +8,27 @@ namespace Dwolla
     {
         public DwollaCheckoutRequestValidator()
         {
-            RuleFor( cr => cr.Key ).NotEmpty();
+            RuleFor( cr => cr.Key ).NotEmpty()
+                .WithName( "CheckoutRequest.Key" );
 
-            RuleFor( cr => cr.Secret ).NotEmpty();
+            RuleFor( cr => cr.Secret ).NotEmpty()
+                .WithName("CheckoutRequest.Secret");
 
             RuleFor( cr => cr.Callback )
                 .Must( uri => uri.IsAbsoluteUri )
                 .Unless( cr => cr.Callback == null )
-                .WithMessage( "The callback URL must be absolute" );
+                .WithMessage( "The CheckoutRequest.Callback URL must be absolute and a valid http/https URL" );
 
             RuleFor( cr => cr.Redirect )
                 .Must( uri => uri.IsAbsoluteUri )
                 .Unless( cr => cr.Redirect == null )
-                .WithMessage( "The redirect URL must be absolute" );
+                .WithMessage( "The CheckoutRequest.Redirect URL must be absolute and a valid http/https URL." );
 
             RuleFor( cr => cr.OrderId ).Length( 1, 100 )
                 .Unless( cr => cr.OrderId == null );
 
-            RuleFor( cr => cr.PurchaseOrder ).NotNull();
+            RuleFor( cr => cr.PurchaseOrder ).NotNull()
+                .SetValidator( new DwollaPurchaseOrderValidator() );
         }
     }
 
@@ -33,19 +36,25 @@ namespace Dwolla
     {
         public DwollaPurchaseOrderValidator()
         {
-            RuleFor( po => po.DestinationId ).NotEmpty();
+            RuleFor( po => po.DestinationId ).NotEmpty()
+                .WithName("PurchaseOrder.DestinationId");
 
-            RuleFor( po => po.Discount ).LessThanOrEqualTo( 0.00m );
+            RuleFor( po => po.Discount ).LessThanOrEqualTo( 0.00m )
+                .WithName("PurchaseOrder.Discount");
 
-            RuleFor( po => po.Shipping ).GreaterThanOrEqualTo( 0.00m );
+            RuleFor( po => po.Shipping ).GreaterThanOrEqualTo( 0.00m )
+                .WithName( "PurchaseOrder.Shipping" );
 
-            RuleFor( po => po.Tax ).GreaterThanOrEqualTo( 0.00m );
+            RuleFor( po => po.Tax ).GreaterThanOrEqualTo( 0.00m )
+                .WithName("PurchaseOrder.Tax");
 
             RuleFor( po => po.OrderItems ).NotNull()
                 .Must( x => x.Count >= 1 )
-                .SetCollectionValidator( new DwollaOrderItemValidator() );
+                .SetCollectionValidator( new DwollaOrderItemValidator() )
+                .WithName( "PurchaseOrder.OrderItems" );
 
-            RuleFor( po => po.Total ).GreaterThanOrEqualTo( 1.00m );
+            RuleFor( po => po.Total ).GreaterThanOrEqualTo( 1.00m )
+                .WithName("PurchaseOrder.Total");
 
             RuleFor( po => po.FacilitatorAmount ).GreaterThanOrEqualTo( 0 )
                 .Must( HasValidFacilitatorAmount )
@@ -74,26 +83,30 @@ namespace Dwolla
             RuleFor( item => item.Description ).Length(1, 200)
                 .When( item => item.Description != null );
 
-            RuleFor( item => item.Name ).Length( 1, 100 );
+            RuleFor( item => item.Name ).Length( 1, 100 )
+                .WithName("OrderItem.Name");
 
-            RuleFor( item => item.Price ).GreaterThanOrEqualTo( 0.00m );
+            RuleFor( item => item.Price ).GreaterThanOrEqualTo( 0.00m )
+                .WithMessage( "The 'OrderItem.{PropertyName}' for '{0}' must be greater than or equal to ${ComparisonValue}.", item => item.Name );
 
-            RuleFor( item => item.Quantity ).GreaterThanOrEqualTo( 1 );
+            RuleFor( item => item.Quantity ).GreaterThanOrEqualTo( 1 )
+                .WithMessage( "The 'OrderItem.{PropertyName}' for '{0}' must be greater than or equal to {ComparisonValue}.", item => item.Name );
+                
         }
     }
 
-    public class DwollaCallbackValidator : AbstractValidator<DwollaCallback>
+    public class DwollaCheckoutResponseValidator : AbstractValidator<DwollaCheckoutResponse>
     {
-        public DwollaCallbackValidator(string appSecret)
+        public DwollaCheckoutResponseValidator()
         {
-            RuleFor( c => c.Signature ).Must( HasValidSignature );
+            CascadeMode = CascadeMode.StopOnFirstFailure;
 
-        }
+            RuleFor( cr => cr.Result )
+                .Must( r => r == DwollaCheckoutRequestResult.Success )
+                .WithMessage( "The checkout request failed. Message from Dwolla's Servers: '{0}'", cr => cr.Message );
 
-        protected virtual bool HasValidSignature( DwollaCallback c, string signature )
-        {
-            var amount = c.Amount;
-            return false;
+            RuleFor( r => r.CheckoutId ).NotEmpty()
+                .WithName( "CheckoutResponse.CheckoutId" );
         }
     }
 }

@@ -34,18 +34,28 @@
     <Reference Include="FluentValidation">
       <HintPath>..\..\lib\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="NBehave.Spec.Framework, Version=0.5.1.263, Culture=neutral, PublicKeyToken=d421feca0f4a05f6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NBehave.Spec.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="NBehave.Spec.NUnit, Version=0.5.1.263, Culture=neutral, PublicKeyToken=d421feca0f4a05f6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\NBehave.Spec.NUnit.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectDumper">
+      <HintPath>..\..\lib\ObjectDumper.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\lib\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http">
-      <HintPath>..\..\lib\System.Net.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,9 +63,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DwollaTests.cs" />
+    <Compile Include="JsonParsingTests.cs" />
+    <Compile Include="ValidationTests\DwollaCheckoutResponseValidatorTests.cs" />
+    <Compile Include="ValidationTests\DwollaCheckoutRequestValidatorTests.cs" />
+    <Compile Include="ValidationTests\DwollaOrderItemValidatorTests.cs" />
+    <Compile Include="ValidationTests\DwollaPurchaseOrderValidatorTests.cs" />
+    <Compile Include="LiveTests\DwollaServerCheckoutApiLiveTests.cs" />
+    <Compile Include="DwollaSignatureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidationTests.cs" />
+    <Compile Include="DwollaServerCheckoutTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dwolla\Dwolla.csproj">
