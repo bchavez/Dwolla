@@ -1,5 +1,6 @@
 Dwolla .NET/C# Library
 ======================
+----------------------
 
 Project Description
 -------------------
@@ -18,27 +19,23 @@ Usage
 var api = new DwollaServerCheckoutApi( appKey:"...", appSecret: "..." );
 
 //Create a checkout request
-var checkoutRequest = new DwollaCheckoutRequest
-                          {
-                              OrderId = "MyOrderTest",
-                              PurchaseOrder = new DwollaPurchaseOrder
-                                                  {
-                                                      OrderItems =
-                                                          {
-                                                              new DwollaOrderItem
-                                                                  {
-                                                                      Description = "Expensive Candy Bar",
-                                                                      Name = "Candy Bar",
-                                                                      Price = 25.00m,
-                                                                      Quantity = 1,
-                                                                  }
-                                                          },
-                                                      DestinationId = "812-111-1111",
-                                                  },
-
-                              Callback = new Uri("http://www.example.com/order-callback")
-
-                          };
+var checkoutRequest = new DwollaCheckoutRequest{
+                             OrderId = "MyOrderTest",
+                             Callback = new Uri("http://www.example.com/order-callback")
+                             PurchaseOrder = new DwollaPurchaseOrder
+                                                 {
+                                                   DestinationId = "812-111-1111",
+                                                   OrderItems = { 
+                                                      new DwollaOrderItem
+                                                      {
+                                                         Description = "Expensive Candy Bar",
+                                                         Name = "Candy Bar",
+                                                         Price = 25.00m,
+                                                         Quantity = 1,
+                                                      }
+                                                   },     
+                                                 },
+                     };
 
 //Send the request to Dwolla.
 var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
@@ -56,10 +53,8 @@ else if( checkoutResponse.Result == DwollaCheckoutRequestResult.Success)
 ```
 
 #### Handling Callbacks ####
+After the customer has completed the checkout process Dwolla will POST a JSON callback object to your Callback URL with the results of the payment. Here's how to handle callback communications from Dwolla.
 ```csharp
-//After the customer has completed the checkout process
-//Dwolla will POST a JSON callback object to your Callback URL
-//with the results of the payment.
 var jsonCallback =
     @"
 {
