@@ -16,13 +16,15 @@ Usage
 ### Off-Site Gateway API ###
 Dwolla allows two methods for you initiate payment from your customer (off-site, without using OAuth).
 
-* By HTML Form Post.
-* By Server-to-Server Communication.
+* Initiate Payments by HTML Form Post.
+* Initiate Payments by Server-to-Server Communication.
 
-Either method will allow you to initiate payment from your customer. Implementers usually choose one method depending on your development scenario.
+Implementers usually chose a single method to initiate payments depending on your development scenario.
+
+Both methods provide options to provide a *Callback URL*. The *Callback URL* is a location on your server where Dwolla will post a JSON object that describes the success or failure of a transaction payment after the user has completed the checkout process.
 
 ----
-#### HTML Form Post ####
+#### Initiate by HTML Form Post ####
 When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission. This is how Dwolla verifies the authenticity of the values in the form post.
 
 ```html
