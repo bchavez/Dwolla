@@ -16,12 +16,12 @@ Usage
 ### Off-Site Gateway API ###
 Dwolla allows two methods for you initiate payment from your customer (off-site, without using OAuth).
 
-* By Form Post Submission.
+* By HTML Form Post.
 * By Server-to-Server Communication.
 
 ----
-#### Form Post Submission ####
-When using the Form submission method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission.
+#### HTML Form Post ####
+When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission. This is how Dwolla verifies the authenticity of the values in the form post.
 
 ```html
 <form accept-charset="UTF-8" action="https://www.dwolla.com/payment/pay" method="post">
