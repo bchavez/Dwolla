@@ -54,6 +54,7 @@ else if( checkoutResponse.Result == DwollaCheckoutRequestResult.Success)
 
 #### Handling Callbacks ####
 After the customer has completed the checkout process Dwolla will POST a JSON callback object to your Callback URL with the results of the payment. Here's how to handle callback communications from Dwolla.
+
 ```csharp
 var jsonCallback =
     @"
