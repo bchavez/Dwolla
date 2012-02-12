@@ -9,7 +9,7 @@ A .NET implementation for the Dwolla API.
 License
 -------
 LGPLv2.1 (GNU Lesser General Public License 2.1)
-
+ 
 
 Usage
 -----
@@ -18,6 +18,8 @@ Dwolla allows two methods for you initiate payment from your customer (off-site,
 
 * By HTML Form Post.
 * By Server-to-Server Communication.
+
+Either method will allow you to initiate payment from your customer. Implementers usually choose one method depending on your development scenario.
 
 ----
 #### HTML Form Post ####
