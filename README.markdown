@@ -100,7 +100,7 @@ else if( checkoutResponse.Result == DwollaCheckoutRequestResult.Success)
 
 -------
 #### Handling Callbacks on Your Server ####
-If you've configured a **Callback URL**, generally speaking, you'll want to verify the authenticity of the callback (to ensure there isn't any URL tampering). Here's how to handle callback communications from Dwolla:
+Regardless of the method you've chosen to initiate payments, if you've configured a **Callback URL**, you'll want to verify the authenticity of the callback (to ensure there isn't any URL tampering going on). Here's how to handle callback communications from Dwolla:
 
 ```csharp
 var jsonCallback =
@@ -130,7 +130,7 @@ if( api.VerifyCallbackAuthenticity(receivedCallback) )
     {
         //Payment was successful.
     }
-    if( receivedCallback.Status == DwollaCallbackStatus.Failed)
+    else if( receivedCallback.Status == DwollaCallbackStatus.Failed)
     {
         //Payment was not successful.
     }
