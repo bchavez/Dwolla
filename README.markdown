@@ -14,6 +14,41 @@ LGPLv2.1 (GNU Lesser General Public License 2.1)
 Usage
 -----
 ### Off-Site Gateway API ###
+Dwolla allows two methods for you initiate payment from your customer (off-site, without using OAuth).
+
+* By Form Post Submission.
+* By Server-to-Server Communication.
+
+----
+#### Form Post Submission ####
+When using the Form submission method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission.
+
+```html
+<form accept-charset="UTF-8" action="https://www.dwolla.com/payment/pay" method="post">
+  <input id="key" name="key" type="hidden" value="myAppKey" />
+  <input id="signature" name="signature" type="hidden" 
+         value="<%= DwollaSignatureUtil.GenerateSignature("appKey", "appSecret",
+                                                           orderId:"188375",
+                                                           DateTime.UtcNow); %>" />
+  <input id="callback" name="callback" type="hidden" 
+        value="http://www.example.com/callback" />
+  <input id="redirect" name="redirect" type="hidden" 
+        value="http://www.example.com/redirect" />
+  <input id="test" name="test" type="hidden" value="true" />
+  <input id="name" name="name" type="hidden" value="Purchase" />
+  <input id="description" name="description" type="hidden" value="Description" />
+  <input id="destinationid" name="destinationid" type="hidden" value="812-111-1111" />
+  <input id="amount" name="amount" type="hidden" value="1.00" />
+  <input id="shipping" name="shipping" type="hidden" value="0.00" />
+  <input id="tax" name="tax" type="hidden" value="0.00" />
+  <input id="orderid" name="orderid" type="hidden" value="188375" />
+  <input id="timestamp" name="timestamp" type="hidden" value="1323302400" />
+	    
+  <button type="submit">Submit Order</button>
+</form>
+```
+
+----
 #### Server-to-Server Checkout Request ####
 The general process of communicating with Dwolla in a Server-to-Server Checkout process involves:
 
