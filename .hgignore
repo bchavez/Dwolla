@@ -6,3 +6,4 @@ syntax: regexp
 .+(?=.user)
 (?=__compile).+
 tools/fb/ILMerge.exe
+(?=__package).+
