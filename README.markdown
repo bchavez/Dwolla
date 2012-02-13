@@ -6,18 +6,18 @@ Project Description
 -------------------
 A .NET implementation for the Dwolla API.
 
-License
--------
+### License ###
 * LGPL (GNU Lesser General Public License)
 
-Requirements
-------------
+### Requirements ###
 * .NET 4.0
 
 Building
 --------
 * Download the source code.
 * Run `build.bat`.
+
+Upon successful build, the results should be in the `\__package` directory created by the build script.
 
 Usage
 -----
