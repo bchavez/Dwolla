@@ -23,28 +23,37 @@ namespace Dwolla.Tests
                                                                   OrderItems =
                                                                       {
                                                                           new DwollaOrderItem
+                                                                              ( name: "Candy Bar",
+                                                                                price: 25.00m,
+                                                                                quantity: 1 )
                                                                               {
                                                                                   Description = "Expensive Candy Bar",
-                                                                                  Name = "Candy Bar",
-                                                                                  Price = 25.00m,
-                                                                                  Quantity = 1,
                                                                               }
                                                                       },
                                                                   DestinationId = "812-111-1111",
                                                               },
 
-                                          Callback = new Uri("http://www.example.com/order-callback")
+                                          Callback = new Uri( "http://www.example.com/order-callback" )
 
                                       };
-
+            
+            //Optional: Validate your checkout request before
+            //          sending the request to Dwolla.
+            var preflightCheck = api.ValidatorFactory.GetValidator<DwollaCheckoutRequest>()
+                .Validate( checkoutRequest );
+            if( !preflightCheck.IsValid )
+            {
+                //Check preflightCheck.Errors for a list of validation errors.
+            }
+            
             //Send the request to Dwolla.
             var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
 
-            if( checkoutResponse.Result == DwollaCheckoutRequestResult.Failure )
+            if( checkoutResponse.Result == DwollaCheckoutResponseResult.Failure )
             {
                 //Handle Error
             }
-            else if( checkoutResponse.Result == DwollaCheckoutRequestResult.Success)
+            else if( checkoutResponse.Result == DwollaCheckoutResponseResult.Success)
             {
                 var redirectUrl = api.GetCheckoutRedirectUrl( checkoutResponse );
                 //Send HTTP Redirect to browser so the 

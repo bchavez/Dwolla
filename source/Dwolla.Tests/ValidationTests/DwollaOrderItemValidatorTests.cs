@@ -58,7 +58,7 @@ namespace Dwolla.Tests.ValidationTests
         [Explicit]
         public void test()
         {
-            var foo = new DwollaOrderItem() {Name = "foo", Price = 2.00m, Quantity = 1};
+            var foo = new DwollaOrderItem("foo", 2.00m, 1);
 
             validator.Validate( foo ).Errors.ToList().ForEach( x => Console.WriteLine( x.ToString() ) );
         }

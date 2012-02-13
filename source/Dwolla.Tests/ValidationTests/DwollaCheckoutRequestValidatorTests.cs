@@ -88,12 +88,9 @@ namespace Dwolla.Tests.ValidationTests
                                                          {
                                                              OrderItems =
                                                                  {
-                                                                     new DwollaOrderItem
+                                                                     new DwollaOrderItem("Candy Bar",-25.00m, 0)
                                                                          {
                                                                              Description = "Expensive Candy Bar",
-                                                                             Name = "Candy Bar",
-                                                                             Price = -25.00m,
-                                                                             Quantity = 0,
                                                                          }
                                                                  },
                                                              DestinationId = "",

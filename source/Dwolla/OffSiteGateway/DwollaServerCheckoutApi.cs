@@ -67,7 +67,7 @@ namespace Dwolla.OffSiteGateway
             var res = client.Execute<DwollaCheckoutResponse>( req );
 
             if( res.ResponseStatus != ResponseStatus.Completed || res.StatusCode != HttpStatusCode.OK )
-                return new DwollaCheckoutResponse {Result = DwollaCheckoutRequestResult.Failure, Message = "Non HTTP status code received."};
+                return new DwollaCheckoutResponse {Result = DwollaCheckoutResponseResult.Failure, Message = "Non HTTP status code received."};
 
             return res.Data;
         }

@@ -34,7 +34,7 @@ namespace Dwolla.Tests
         {
             var r = new DwollaCheckoutResponse
                         {
-                            Result = DwollaCheckoutRequestResult.Success,
+                            Result = DwollaCheckoutResponseResult.Success,
                             CheckoutId = "C3D4DC4F-5074-44CA-8639-B679D0A70803",
                         };
 
@@ -50,7 +50,7 @@ namespace Dwolla.Tests
         {
             var r = new DwollaCheckoutResponse
                         {
-                            Result = DwollaCheckoutRequestResult.Failure,
+                            Result = DwollaCheckoutResponseResult.Failure,
                             Message = "invalid total."
                         };
 

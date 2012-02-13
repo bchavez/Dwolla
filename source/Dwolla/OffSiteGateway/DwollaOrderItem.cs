@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Dwolla.OffSiteGateway.Validators;
 using FluentValidation.Attributes;
 
@@ -6,6 +7,19 @@ namespace Dwolla.OffSiteGateway
     [Validator(typeof(DwollaOrderItemValidator))]
     public class DwollaOrderItem
     {
+#if DEBUG
+        public DwollaOrderItem()
+        {
+        }
+#endif
+
+        public DwollaOrderItem( string name, decimal price, int quantity )
+        {
+            Name = name;
+            Price = price;
+            Quantity = quantity;
+        }
+
         /// <summary>Description of the item. Must be 200 characters or less.</summary>
         /// <remarks>Required: No</remarks>
         public string Description { get; set; }

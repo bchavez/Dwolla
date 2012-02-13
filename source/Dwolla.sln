@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Tests", "Dwolla.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla", "Dwolla\Dwolla.csproj", "{78C02010-859C-4B67-9E9C-5D6E39682B9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildFiles", "BuildFiles\BuildFiles.csproj", "{337978F3-D635-41A5-B149-4521660A4EFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{78C02010-859C-4B67-9E9C-5D6E39682B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C02010-859C-4B67-9E9C-5D6E39682B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78C02010-859C-4B67-9E9C-5D6E39682B9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337978F3-D635-41A5-B149-4521660A4EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337978F3-D635-41A5-B149-4521660A4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337978F3-D635-41A5-B149-4521660A4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337978F3-D635-41A5-B149-4521660A4EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

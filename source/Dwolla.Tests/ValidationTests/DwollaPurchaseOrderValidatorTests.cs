@@ -71,7 +71,7 @@ namespace Dwolla.Tests.ValidationTests
         {
             var goodOrder = new DwollaPurchaseOrder()
                                 {
-                                    OrderItems = {new DwollaOrderItem()}
+                                    OrderItems = {new DwollaOrderItem("foo", 5.00m, 1)}
                                 };
             validator.ShouldNotHaveValidationErrorFor( po => po.OrderItems, goodOrder );            
         }
@@ -83,20 +83,14 @@ namespace Dwolla.Tests.ValidationTests
                             {
                                 OrderItems =
                                     {
-                                        new DwollaOrderItem
+                                        new DwollaOrderItem("Candy Bar", 25.00m, 1)
                                             {
-                                                Price = 25.00m,
-                                                Quantity = 1,
-                                                Name = "Candy Bar",
                                                 Description = "Super Expensive Candy Bar"
                                             },
-                                        new DwollaOrderItem
+                                            new DwollaOrderItem("Lolly Pop", 30.00m, 2)
                                             {
-                                                Price = 30.00m,
-                                                Quantity = 2,
-                                                Name = "Lolly Pops",
-                                                Description = "Super Expensive Lolly Pops"
-                                            }
+                                                Description = "Super Expensive Lolly Pop"
+                                            },
                                     }
                             };
 
@@ -113,11 +107,8 @@ namespace Dwolla.Tests.ValidationTests
                             {
                                 OrderItems =
                                     {
-                                        new DwollaOrderItem
+                                        new DwollaOrderItem( price: 25.00m, quantity: 1, name: "Candy Bar" )
                                             {
-                                                Price = 25.00m,
-                                                Quantity = 1,
-                                                Name = "Candy Bar",
                                                 Description = "Super Expensive Candy Bar"
                                             }
                                     },

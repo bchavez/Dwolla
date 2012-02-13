@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JsonParsingTests.cs" />
+    <Compile Include="JsonSerializationTests.cs" />
     <Compile Include="ValidationTests\DwollaCheckoutResponseValidatorTests.cs" />
     <Compile Include="ValidationTests\DwollaCheckoutRequestValidatorTests.cs" />
     <Compile Include="ValidationTests\DwollaOrderItemValidatorTests.cs" />

@@ -4,3 +4,5 @@ syntax: regexp
 (?=/obj/).+
 (?=/bin/).+
 .+(?=.user)
+(?=__compile).+
+tools/fb/ILMerge.exe
