@@ -6,10 +6,10 @@ Project Description
 -------------------
 A .NET implementation for the Dwolla API.
 
-### License ###
+### License
 * LGPL (GNU Lesser General Public License)
 
-### Requirements ###
+### Requirements
 * .NET 4.0
 
 Building
@@ -21,7 +21,7 @@ Upon successful build, the results should be in the `\__package` directory creat
 
 Usage
 -----
-### Off-Site Gateway API ###
+### Off-Site Gateway API
 Dwolla allows two methods for you initiate payment from your customer (off-site, without using OAuth).
 
 * Initiate Payments by HTML Form Post.
@@ -32,7 +32,7 @@ Implementers usually choose a single method to initiate payments depending on yo
 Both methods provide an option to configure a **Callback URL**. The **Callback URL** is a location on your server where Dwolla will post a JSON object that describes the success or failure of a payment after the user has completed the checkout process.
 
 ----
-#### Initiate Payments by HTML Form Post ####
+#### Initiate Payments by HTML Form Post
 When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission. This is how Dwolla verifies the authenticity of the values in the form post.
 
 ```html
@@ -61,7 +61,7 @@ When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature(
 ```
 
 ----
-#### Initiate Payments by Server-to-Server Checkout Request ####
+#### Initiate Payments by Server-to-Server Checkout Request
 The general process of communicating with Dwolla in a Server-to-Server Checkout process involves:
 
 1. Creating a `DwollaCheckoutRequest`.
@@ -116,7 +116,7 @@ else if( checkoutResponse.Result == DwollaCheckoutResponseResult.Success)
 ```
 
 -------
-#### Handling Callbacks on Your Server ####
+#### Handling Callbacks on Your Server
 Regardless of the method you've chosen to initiate payments, if you've configured a **Callback URL**, you'll want to verify the authenticity of the callback (to ensure there isn't any URL tampering going on). Here's how to handle callback communications from Dwolla:
 
 ```csharp
