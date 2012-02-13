@@ -6,9 +6,9 @@ Project Description
 -------------------
 A .NET implementation for the Dwolla API.
 
-License | Requirements
+###License | ###Requirements
 --------| ------------
-LGPL (GNU Lesser General Public License) | .NET 4.0
+LGPL (GNU Lesser General Public License) | * .NET 4.0
 
 
 Building
