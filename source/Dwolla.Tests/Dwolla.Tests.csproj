@@ -72,6 +72,7 @@
     <Compile Include="DwollaSignatureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DwollaServerCheckoutTests.cs" />
+    <Compile Include="ValidationTests\DwollaServerCheckoutApiValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dwolla\Dwolla.csproj">
