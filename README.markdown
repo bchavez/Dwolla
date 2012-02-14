@@ -17,12 +17,12 @@ Building
 * Download the source code.
 * Run `build.bat`.
 
-Upon successful build, the results should be in the `\__package` directory created by the build script.
+Upon successful build, the results will be in the `\__package` directory.
 
 Usage
 -----
 ### Off-Site Gateway API
-Dwolla allows two methods for you initiate payment from your customer (off-site, without using OAuth).
+Dwolla allows two methods to initiate payment from a customer (off-site, without using OAuth).
 
 * Initiate Payments by HTML Form Post.
 * Initiate Payments by Server-to-Server Communication.
@@ -33,7 +33,7 @@ Both methods provide an option to configure a **Callback URL**. The **Callback U
 
 ----
 #### Initiate Payments by HTML Form Post
-When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a signature for your form submission. This is how Dwolla verifies the authenticity of the values in the form post.
+When using the HTML Form method, use the `DwollaSignatureUtil.GenerateSignature()` to generate a `signature` for the form submission. Dwolla uses the form's `signature` value to verify the authenticity of the form submission.
 
 ```html
 <form accept-charset="UTF-8" action="https://www.dwolla.com/payment/pay" method="post">
