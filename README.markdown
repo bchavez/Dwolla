@@ -7,7 +7,7 @@ Project Description
 A .NET implementation for the Dwolla API.
 
 ### License
-* LGPL (GNU Lesser General Public License)
+* [MIT License](https://github.com/bchavez/Dwolla/blob/master/LICENSE)
 
 ### Requirements
 * .NET 4.0

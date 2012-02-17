@@ -19,11 +19,12 @@ namespace BuildFiles
         private static AssemblyInfoDetails GlobalAssemblyInfo()
         {
             return AssemblyInfo.Language.CSharp
-                .Company( "Bit Armory, Inc." )
-                .Copyright( "Copyright Bit Armory, Inc © " + DateTime.UtcNow.Year )
+                .Company( "Brian Chavez" )
+                .Copyright( "Brian Chavez © " + DateTime.UtcNow.Year )
                 .Version( Properties.CommandLineProperties.Version() )
                 .FileVersion( Properties.CommandLineProperties.Version() )
-                .InformationalVersion( Properties.CommandLineProperties.Version() );
+                .InformationalVersion( "{0} built on {1} UTC".With( Properties.CommandLineProperties.Version(), DateTime.UtcNow ) )
+                .Description( "http://www.github.com/bchavez/Dwolla" );
         }
 
         public class Dwolla
@@ -36,8 +37,7 @@ namespace BuildFiles
             public static readonly AssemblyInfoDetails AssemblyInfo =
                 GlobalAssemblyInfo()
                     .Title( "Dwolla API for .NET" )
-                    .Product( "Dwolla API" )
-                    .Description( "A .NET implementation for the Dwolla API." );
+                    .Product( "Dwolla API" );
         }
 
         public class Tests
