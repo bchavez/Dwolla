@@ -53,5 +53,9 @@ namespace Dwolla.OffSiteGateway
         /// <summary>List of line items for the purchase order.</summary>
         /// <remarks>Required: Yes</remarks>
         public List<DwollaOrderItem> OrderItems { get; protected set; }
+
+        /// <summary>Note to attach to the transaction. Limited to 250 characters.</summary>
+        /// <remarks>Required: No</remarks>
+        public string Notes { get; set; }
     }
 }

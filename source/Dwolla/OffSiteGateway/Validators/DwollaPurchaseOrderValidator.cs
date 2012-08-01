@@ -26,6 +26,10 @@ namespace Dwolla.OffSiteGateway.Validators
             RuleFor( po => po.Total ).GreaterThanOrEqualTo( 1.00m )
                 .WithName("PurchaseOrder.Total");
 
+            RuleFor( po => po.Notes ).Length( 0, 250 )
+                .When( po => po.Notes != null )
+                .WithName("PurchaseOrder.Notes");
+
             RuleFor( po => po.FacilitatorAmount ).GreaterThanOrEqualTo( 0 )
                 .Must( HasValidFacilitatorAmount )
                 .When( po => po.FacilitatorAmount != null )

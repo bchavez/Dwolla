@@ -18,6 +18,18 @@ namespace Dwolla.Tests.ValidationTests
         }
 
         [Test]
+        public void notes_validation()
+        {
+            //require length to be less than or equal to 250 chars
+            validator.ShouldHaveValidationErrorFor( po => po.Notes,
+                                                    "aasdfasddfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfadfasdfasdfasdfasdfadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdffffffffffff" );
+
+            validator.ShouldNotHaveValidationErrorFor( po => po.Notes, null as string );
+            validator.ShouldNotHaveValidationErrorFor( po => po.Notes, "" );
+            validator.ShouldNotHaveValidationErrorFor( po => po.Notes, "Foo" );
+        }
+
+        [Test]
         public void destination_id_property_validation()
         {
             validator.ShouldNotHaveValidationErrorFor( po => po.DestinationId, "812-111-1111" );
