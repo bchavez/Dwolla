@@ -6,8 +6,7 @@ namespace Dwolla.OffSiteGateway.Validators
     {
         public DwollaOrderItemValidator()
         {
-            RuleFor( item => item.Description ).Length(1, 200)
-                .When( item => item.Description != null );
+            RuleFor( item => item.Description ).Length( 1, 200 );
 
             RuleFor( item => item.Name ).Length( 1, 100 )
                 .WithName("OrderItem.Name");

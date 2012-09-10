@@ -4,7 +4,7 @@ using FluentValidation.Attributes;
 
 namespace Dwolla.OffSiteGateway
 {
-    [Validator(typeof(DwollaCheckoutRequestValidator))]
+    [Validator( typeof( DwollaCheckoutRequestValidator ) )]
     public class DwollaCheckoutRequest
     {
         /// <summary>Consumer key for the application.</summary>
@@ -22,6 +22,10 @@ namespace Dwolla.OffSiteGateway
         /// <summary>URL to return the user to after they authorize the purchase. If not provided, will default to registered Payment Redirect URL. If no default found, results in error.</summary>
         /// <remarks>Required: No</remarks>
         public Uri Redirect { get; set; }
+
+        /// <summary>Flag to allow guest checkout and bank-funded payments.</summary>
+        /// <remarks>Required: No</remarks>
+        public bool AllowFundingSources { get; set; }
 
         /// <summary>Merchant’s order ID to identify the transaction.</summary>
         /// <remarks>Required: No</remarks>

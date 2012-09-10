@@ -21,7 +21,7 @@ namespace Dwolla.OffSiteGateway
         }
 
         /// <summary>Description of the item. Must be 200 characters or less.</summary>
-        /// <remarks>Required: No</remarks>
+        /// <remarks>Required: Yes</remarks>
         public string Description { get; set; }
         
         /// <summary>Name of the item. Must be 100 characters or less.</summary>

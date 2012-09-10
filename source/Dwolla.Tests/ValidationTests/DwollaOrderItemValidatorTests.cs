@@ -19,9 +19,9 @@ namespace Dwolla.Tests.ValidationTests
         }
 
         [Test]
-        public void description_should_be_at_least_1_if_not_null()
+        public void description_should_be_at_least_1()
         {
-            validator.ShouldNotHaveValidationErrorFor( o => o.Description, null as string );
+            validator.ShouldHaveValidationErrorFor( o => o.Description, null as string );
             
             validator.ShouldHaveValidationErrorFor( o => o.Description, string.Empty );
         }
