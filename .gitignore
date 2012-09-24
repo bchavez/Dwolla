@@ -1,3 +1,8 @@
+## CUSTOM
+__compile/
+__package/
+source/Dwolla.Tests.Web/
+
 #################
 ## Eclipse
 #################
