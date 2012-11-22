@@ -160,7 +160,7 @@ else
 
 Reference
 ---------
-* [Dwolla Off-Site Gateway API Documentation](https://www.dwolla.com/developers/offsitegateway)
+* [Dwolla Off-Site Gateway API Documentation](http://developers.dwolla.com/dev/docs/gateway)
 
 
 Created by [Brian Chavez](http://bchavez.bitarmory.com).
