@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using Dwolla.OffSiteGateway;
 using Dwolla.OffSiteGateway.Validators;
 using FluentValidation.TestHelper;
+using NBehave.Spec.NUnit;
 using NUnit.Framework;
 
 namespace Dwolla.Tests.ValidationTests
@@ -131,6 +133,43 @@ namespace Dwolla.Tests.ValidationTests
 
             order.FacilitatorAmount = 6.25m; // max facilitator fee for the total
             validator.ShouldHaveValidationErrorFor( po => po.FacilitatorAmount, order );
+        }
+
+        [Test]
+        public void ensure_customerinfo_property_has_a_validator()
+        {
+            validator.ShouldHaveChildValidator( po => po.CustomerInfo, typeof(DwollaCustomerInfoValidator) );
+        }
+
+        [Test]
+        [Explicit]
+        public void error_message_output()
+        {
+            var order = new DwollaPurchaseOrder
+                {
+                    CustomerInfo = new DwollaCustomerInfo
+                        {
+                            FirstName = "Brian",
+                            LastName = "Chavez",
+                            City = "Beverly Hills",
+                            State = "Ca",
+                            Zip = "90210",
+                            Email = "bchavez-invalid",
+                        },
+                    OrderItems =
+                        {
+                            new DwollaOrderItem( price: 25.00m, quantity: 1, name: "Candy Bar" )
+                                {
+                                    Description = "Super Expensive Candy Bar"
+                                }
+                        },
+                    DestinationId = "123-123-1234",
+                    FacilitatorAmount = 5.00m,
+                };
+
+            var vr = validator.Validate( order );
+            vr.Errors.ToList().ForEach( x => Console.WriteLine( x.ToString() ) );
+            vr.IsValid.ShouldBeTrue();
         }
 
     }

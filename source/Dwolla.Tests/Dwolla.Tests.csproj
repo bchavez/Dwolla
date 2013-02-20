@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation">
+    <Reference Include="FluentValidation, Version=3.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="NBehave.Spec.Framework, Version=0.5.1.263, Culture=neutral, PublicKeyToken=d421feca0f4a05f6, processorArchitecture=MSIL">
@@ -66,6 +67,7 @@
     <Compile Include="JsonSerializationTests.cs" />
     <Compile Include="ValidationTests\DwollaCheckoutResponseValidatorTests.cs" />
     <Compile Include="ValidationTests\DwollaCheckoutRequestValidatorTests.cs" />
+    <Compile Include="ValidationTests\DwollaCustomerInfoValidatorTests.cs" />
     <Compile Include="ValidationTests\DwollaOrderItemValidatorTests.cs" />
     <Compile Include="ValidationTests\DwollaPurchaseOrderValidatorTests.cs" />
     <Compile Include="UsageExamples.cs" />

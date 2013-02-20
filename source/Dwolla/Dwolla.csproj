@@ -54,11 +54,13 @@
     <Compile Include="OffSiteGateway\DwollaCallback.cs" />
     <Compile Include="OffSiteGateway\DwollaCheckoutRequest.cs" />
     <Compile Include="OffSiteGateway\DwollaCheckoutResponse.cs" />
+    <Compile Include="OffSiteGateway\DwollaCustomerInfo.cs" />
     <Compile Include="OffSiteGateway\DwollaOrderItem.cs" />
     <Compile Include="OffSiteGateway\DwollaPurchaseOrder.cs" />
     <Compile Include="OffSiteGateway\DwollaServerCheckoutApi.cs" />
     <Compile Include="DwollaSignatureUtil.cs" />
     <Compile Include="OffSiteGateway\Validators\DwollaCheckoutRequestValidator.cs" />
+    <Compile Include="OffSiteGateway\Validators\DwollaCustomerInfoValidator.cs" />
     <Compile Include="OffSiteGateway\Validators\DwollaOrderItemValidator.cs" />
     <Compile Include="OffSiteGateway\Validators\DwollaPurchaseOrderValidator.cs" />
     <Compile Include="OffSiteGateway\Validators\DwollaServerCheckoutApiValidator.cs" />

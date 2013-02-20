@@ -34,6 +34,10 @@ namespace Dwolla.OffSiteGateway.Validators
                 .Must( HasValidFacilitatorAmount )
                 .When( po => po.FacilitatorAmount != null )
                 .WithMessage( "Facilitator fee cannot exceed 25% of the total and must be greater than or equal to zero or null." );
+
+            RuleFor( po => po.CustomerInfo )
+                .SetValidator( new DwollaCustomerInfoValidator() )
+                .WithName( "PurchaseOrder.CustomerInfo" );
         }
         protected virtual bool HasValidFacilitatorAmount(DwollaPurchaseOrder po, decimal? facilitatorAmount )
         {

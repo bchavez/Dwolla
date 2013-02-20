@@ -13,6 +13,11 @@ namespace Dwolla.OffSiteGateway
             this.OrderItems = new List<DwollaOrderItem>();
         }
 
+        /// <summary>
+        /// JSON object representing the customer's contact information.
+        /// </summary>
+        public DwollaCustomerInfo CustomerInfo { get; set; }
+
         /// <summary>Dwolla key of the Dwolla account receiving the funds.</summary>
         /// <remarks>Required: Yes</remarks>
         /// <example>812-111-1111</example>
