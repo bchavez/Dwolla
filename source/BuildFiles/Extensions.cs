@@ -1,6 +1,5 @@
 ﻿using FluentBuild.ApplicationProperties;
-using FluentBuild.Core;
-using FluentBuild.Utilities;
+using FluentFs.Core;
 
 namespace BuildFiles
 {
@@ -21,7 +20,7 @@ namespace BuildFiles
 
     public static class ExtensionsForBuildFolders
     {
-        public static BuildFolder Wipe(this BuildFolder f)
+        public static Directory Wipe(this Directory f)
         {
             return f.Delete( OnError.Continue ).Create();
         }

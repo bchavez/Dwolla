@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using Dwolla.OffSiteGateway.Validators;
+using Dwolla.Serialization;
 using FluentValidation;
 using FluentValidation.Attributes;
 using RestSharp;
@@ -85,9 +86,10 @@ namespace Dwolla.OffSiteGateway
             var client = new RestClient();
 
             var req = new RestRequest( RequestUrl, Method.POST )
-            {
-                RequestFormat = DataFormat.Json
-            }
+                {
+                    RequestFormat = DataFormat.Json
+                }
+                .WithNewtonsoft()
                 .AddBody( checkoutRequest );
 
             var res = client.Execute<DwollaCheckoutResponse>( req );

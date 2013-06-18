@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using Dwolla.OffSiteGateway;
 using Dwolla.OffSiteGateway.Validators;
+using FluentAssertions;
 using FluentValidation.Attributes;
 using FluentValidation.TestHelper;
-using NBehave.Spec.NUnit;
 using NUnit.Framework;
 
 namespace Dwolla.Tests.ValidationTests
@@ -100,7 +100,7 @@ namespace Dwolla.Tests.ValidationTests
             var results = new AttributedValidatorFactory().GetValidator<DwollaCheckoutRequest>()
                 .Validate( badRequest );
 
-            results.IsValid.ShouldBeFalse();
+            results.IsValid.Should().BeFalse();
 
             //check customized error message descriptions too.
             results.Errors.Select( x =>
@@ -115,7 +115,7 @@ namespace Dwolla.Tests.ValidationTests
                                          "The 'OrderItem.Quantity' for 'Candy Bar' must be greater than or equal to 1.",
                                          "'PurchaseOrder.Total' must be greater than or equal to '1.00'."
                                      } )
-                .ShouldBeTrue();
+                .Should().BeTrue();
         }
     }
 }

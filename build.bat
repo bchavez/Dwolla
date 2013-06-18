@@ -1,1 +1,1 @@
-tools\fb\fb.exe source\BuildFiles\BuildFiles.dll -c:BuildTask -p:Version="0.3.1.0"
+source\packages\FluentBuild.1.2.0.0\lib\net40\fb.exe source\BuildFiles\BuildFiles.dll -c:BuildTask -p:Version="0.3.2.0"

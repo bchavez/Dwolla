@@ -1,11 +1,8 @@
 ﻿using System;
 using Dwolla.OffSiteGateway;
+using FluentAssertions;
 using FluentValidation;
-using NBehave.Spec.NUnit;
 using NUnit.Framework;
-using ObjectDumper;
-using RestSharp;
-using RestSharp.Deserializers;
 
 namespace Dwolla.Tests
 {
@@ -26,7 +23,7 @@ namespace Dwolla.Tests
             var api = new DwollaServerCheckoutApi( "test", "test" );
 
             api.VerifyCallbackAuthenticity( c )
-                .ShouldBeTrue();
+               .Should().BeTrue();
         }
 
         [Test]
@@ -42,7 +39,7 @@ namespace Dwolla.Tests
 
             var redirectUrl = api.GetCheckoutRedirectUrl( r );
 
-            redirectUrl.ShouldEqual( "https://www.dwolla.com/payment/checkout/C3D4DC4F-5074-44CA-8639-B679D0A70803" );
+            redirectUrl.Should().Be( "https://www.dwolla.com/payment/checkout/C3D4DC4F-5074-44CA-8639-B679D0A70803" );
         }
 
         [Test]

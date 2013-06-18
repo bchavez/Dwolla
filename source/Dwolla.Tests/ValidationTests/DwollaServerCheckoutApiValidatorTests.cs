@@ -1,8 +1,8 @@
 using System;
 using Dwolla.OffSiteGateway;
 using Dwolla.OffSiteGateway.Validators;
+using FluentAssertions;
 using FluentValidation;
-using NBehave.Spec.NUnit;
 using NUnit.Framework;
 
 namespace Dwolla.Tests.ValidationTests

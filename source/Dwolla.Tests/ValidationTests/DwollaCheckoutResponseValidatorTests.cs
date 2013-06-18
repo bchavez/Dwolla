@@ -1,8 +1,8 @@
 using System.Linq;
 using Dwolla.OffSiteGateway;
 using Dwolla.OffSiteGateway.Validators;
+using FluentAssertions;
 using FluentValidation.TestHelper;
-using NBehave.Spec.NUnit;
 using NUnit.Framework;
 
 namespace Dwolla.Tests.ValidationTests
@@ -28,8 +28,8 @@ namespace Dwolla.Tests.ValidationTests
         public void fluent_validate_should_display_checkout_result_message_on_failed_checkout_response()
         {
             var result = this.validator.Validate( new DwollaCheckoutResponse { Result = DwollaCheckoutResponseResult.Failure, Message = "Invalid total." } );
-            result.IsValid.ShouldBeFalse();
-            result.Errors.First().ErrorMessage.ShouldEqual( "The checkout request failed. Message from Dwolla's Servers: 'Invalid total.'" );
+            result.IsValid.Should().BeFalse();
+            result.Errors.First().ErrorMessage.Should().Be( "The checkout request failed. Message from Dwolla's Servers: 'Invalid total.'" );
         }
 
         [Test]

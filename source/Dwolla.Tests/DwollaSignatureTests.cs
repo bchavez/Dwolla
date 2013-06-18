@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Dwolla.OffSiteGateway;
-using NBehave.Spec.NUnit;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Dwolla.Tests
@@ -34,7 +34,7 @@ namespace Dwolla.Tests
             var hmacExample = DocumentationExample.HmacSingatureExample( "test", "test", DwollaSignatureUtil.UnixEpochTime( timestamp ), "1" );
             var apiExample = DwollaSignatureUtil.GenerateSignature( "test", "test", "1", timestamp );
 
-            hmacExample.ShouldEqual( apiExample );
+            hmacExample.Should().Be( apiExample );
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Dwolla.Tests
                         };
 
             DwollaSignatureUtil.VerifyCallbackSignature( "test", c.Signature, c.CheckoutId, c.Amount )
-                .ShouldBeTrue();
+                .Should().BeTrue();
         }
     }
 

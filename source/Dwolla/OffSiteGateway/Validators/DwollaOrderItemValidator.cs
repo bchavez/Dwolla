@@ -6,9 +6,13 @@ namespace Dwolla.OffSiteGateway.Validators
     {
         public DwollaOrderItemValidator()
         {
-            RuleFor( item => item.Description ).Length( 1, 200 );
+            RuleFor( item => item.Description )
+                .NotNull()
+                .Length( 1, 200 );
 
-            RuleFor( item => item.Name ).Length( 1, 100 )
+            RuleFor( item => item.Name )
+                .NotNull()
+                .Length( 1, 100 )
                 .WithName("OrderItem.Name");
 
             RuleFor( item => item.Price ).GreaterThanOrEqualTo( 0.00m )

@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using Dwolla.OffSiteGateway;
 using Dwolla.OffSiteGateway.Validators;
+using FluentAssertions;
 using FluentValidation.TestHelper;
-using NBehave.Spec.NUnit;
 using NUnit.Framework;
 
 namespace Dwolla.Tests.ValidationTests
@@ -169,7 +169,7 @@ namespace Dwolla.Tests.ValidationTests
 
             var vr = validator.Validate( order );
             vr.Errors.ToList().ForEach( x => Console.WriteLine( x.ToString() ) );
-            vr.IsValid.ShouldBeTrue();
+            vr.IsValid.Should().BeTrue();
         }
 
     }

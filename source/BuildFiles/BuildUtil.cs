@@ -1,18 +1,18 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Xml.XPath;
 using FluentBuild.Core;
+using FluentFs.Core;
 
 namespace BuildFiles
 {
     public class BuildUtil
     {
-        public static FileSet GetProjectReferences(BuildArtifact projectFile, BuildFolder libFolder)
+        public static FileSet GetProjectReferences(File projectFile, Directory libFolder)
         {
             var references = XDocUtil.LoadIgnoreingNamespace( projectFile.ToString() )
                 .XPathSelectElements( "//HintPath" )
-                .Select( h => Path.GetFileNameWithoutExtension( h.Value ) )
+                .Select( h => System.IO.Path.GetFileNameWithoutExtension( h.Value ) )
                 .ToList();
 
 
@@ -25,6 +25,11 @@ namespace BuildFiles
 
                                                  return set;
                                              }, set => set );
+        }
+
+        public static File GetILMerge()
+        {
+            return Folders.Lib.File( "**/ILMerge.exe" );
         }
     }
 }
