@@ -3,6 +3,7 @@ using FluentBuild;
 using FluentBuild.Core;
 using FluentFs.Core;
 using System.Linq;
+using ILMerging;
 
 namespace BuildFiles.Tasks
 {
@@ -19,7 +20,7 @@ namespace BuildFiles.Tasks
             Folders.CompileOutput.Wipe();
             Folders.PackageOutput.Wipe();
         }
-         
+
         public void CompileSources()
         {
             var assemblyInfoFile = Folders.CompileOutput.File( "Global.AssemblyInfo.cs" );
@@ -40,39 +41,38 @@ namespace BuildFiles.Tasks
 
             assemblyInfoFile.Delete( OnError.Continue );
 
+            Defaults.Logger.WriteHeader( "BUILD COMPLETE. Packaging ..." );
+
             Task.Run.Zip.Compress( z =>
                 {
                     z.SourceFolder( Projects.Dwolla.OutputDirectory );
                     z.To( Projects.Dwolla.Package );
                 } );
 
+            Defaults.Logger.Write( "RESULTS", "{0}", Projects.Dwolla.Package.ToString() );
+
+            
             //IL MERGE
+            Projects.Dwolla.ILMergeDirectory.Create();
+            var ilMerge = new ILMerge();
+            ilMerge.SetInputAssemblies( Projects.Dwolla.OutputDirectory.Files( "**/*.dll" ).Files.ToArray() );
+            ilMerge.OutputFile = Projects.Dwolla.ILMergeFile.ToString();
+            ilMerge.TargetKind = ILMerge.Kind.Dll;
+            ilMerge.Internalize = true;
 
-            Task.Run.ILMerge( il =>
-                {
-                    var exe = Folders.Lib.Files( @"**\ILMerge.exe" ).Files.First();
+            ilMerge.SetTargetPlatform( "v4", Defaults.FrameworkVersion.GetPathToFrameworkInstall() );
+            ilMerge.DebugInfo = true;
+            ilMerge.Merge();
 
-                    il.ExecutableLocatedAt( exe );
-
-                    //the dlls to merge
-                    Projects.Dwolla.OutputDirectory.Files( "**/*.dll" )
-                            .Files.ToList()
-                            .ForEach( dll => il.AddSource( dll ) );
-
-                    Projects.Dwolla.ILMergeDirectory.Create();
-                    //output.
-                    il.OutputTo( Projects.Dwolla.ILMergeFile );
-
-                } );
 
             Task.Run.Zip.Compress( z =>
                 {
                     z.SourceFolder( Projects.Dwolla.ILMergeDirectory );
-                    z.To( System.IO.Path.ChangeExtension( Projects.Dwolla.Package.ToString(), ".ILMerged.zip" ) );
+                    z.To( Projects.Dwolla.ILMergePackage );
                 } );
 
-            Defaults.Logger.WriteHeader( "BUILD COMPLETE" );
-            Defaults.Logger.Write( "RESULTS", "{0}", Projects.Dwolla.Package.ToString() );
+            Defaults.Logger.Write( "RESULTS", "{0}", Projects.Dwolla.ILMergePackage.ToString() );
         }
+
     }
 }
