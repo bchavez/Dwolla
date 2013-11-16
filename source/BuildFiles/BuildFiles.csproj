@@ -17,10 +17,11 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>.\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,12 +41,12 @@
     <Reference Include="fb">
       <HintPath>..\packages\FluentBuild.1.2.0.0\lib\net40\fb.exe</HintPath>
     </Reference>
+    <Reference Include="Fluent.IO">
+      <HintPath>..\packages\FluentPath.1.0.0\lib\Net4\Fluent.IO.dll</HintPath>
+    </Reference>
     <Reference Include="FluentBuild, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentBuild.1.2.0.0\lib\net40\FluentBuild.dll</HintPath>
-    </Reference>
-    <Reference Include="ILMerge">
-      <HintPath>..\packages\ilmerge.2.13.0307\ILMerge.exe</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.XmlTransform">
@@ -67,7 +68,7 @@
   <ItemGroup>
     <Compile Include="BuildSettings.cs" />
     <Compile Include="BuildUtil.cs" />
-    <Compile Include="Debug\BuildDebugger.cs" />
+    <Compile Include="Debugger\BuildDebugger.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Tasks\BuildTask.cs" />
     <Compile Include="XDocUtil.cs" />
@@ -80,8 +81,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) $(ProjectDir)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

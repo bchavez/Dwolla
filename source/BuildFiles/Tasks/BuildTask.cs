@@ -1,9 +1,9 @@
 ﻿using System.Linq;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using Fluent.IO;
 using FluentBuild;
-using FluentBuild.Core;
 using FluentFs.Core;
-using System.Linq;
-using ILMerging;
 
 namespace BuildFiles.Tasks
 {
@@ -18,7 +18,7 @@ namespace BuildFiles.Tasks
         public void Clean()
         {
             Folders.CompileOutput.Wipe();
-            Folders.PackageOutput.Wipe();
+            Folders.Package.Wipe();
         }
 
         public void CompileSources()
@@ -43,16 +43,24 @@ namespace BuildFiles.Tasks
 
             Defaults.Logger.WriteHeader( "BUILD COMPLETE. Packaging ..." );
 
-            Task.Run.Zip.Compress( z =>
-                {
-                    z.SourceFolder( Projects.DwollaCheckout.OutputDirectory );
-                    z.To( Projects.DwollaCheckout.Package );
-                } );
-
-            Defaults.Logger.Write( "RESULTS", "{0}", Projects.DwollaCheckout.Package.ToString() );
-
             
-            //IL MERGE
+            //copy compile directory to package directory
+            Path.Get( Projects.DwollaCheckout.OutputDirectory.ToString() )
+                .Copy( Projects.DwollaCheckout.PackageDir.ToString(), Overwrite.Always, recursive: true );
+
+            var version = Properties.CommandLineProperties.Version();
+
+            Defaults.Logger.Write( "RESULTS", "NuGet packing" );
+
+            var nuget = Path.Get( Folders.Lib.ToString() )
+                .Files( "NuGet.exe", recursive: true ).First();
+
+            Task.Run.Executable( e => e.ExecutablePath(nuget.FullPath)
+                .WithArguments( "pack", Projects.DwollaCheckout.NugetSpec.Path, "-Version", version, "-OutputDirectory", Folders.Package.ToString() ) );
+
+            Defaults.Logger.Write( "RESULTS", "Setting NuGet PUSH script" );
+            var pushcmd = "{0} push {1}".With( nuget.MakeRelative().ToString(), Path.Get(Projects.DwollaCheckout.NugetNupkg.ToString()).MakeRelative().ToString() );
+            Defaults.Logger.Write( "RESULTS", pushcmd );
 
         }
 

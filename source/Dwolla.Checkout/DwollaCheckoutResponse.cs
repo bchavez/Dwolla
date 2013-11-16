@@ -14,7 +14,7 @@ namespace Dwolla.Checkout
             Result = DwollaCheckoutResponseResult.Failure;
         }
 
-        /// <summary>The result of the checkout request.</summar
+        /// <summary>The result of the checkout request.</summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public DwollaCheckoutResponseResult Result { get; set; }
 

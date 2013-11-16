@@ -9,8 +9,9 @@ namespace BuildFiles
     {
         public static readonly Directory WorkingFolder = new Directory( Properties.CurrentDirectory );
         public static readonly Directory CompileOutput = WorkingFolder.SubFolder( "__compile" );
-        public static readonly Directory PackageOutput = WorkingFolder.SubFolder( "__package" );
+        public static readonly Directory Package = WorkingFolder.SubFolder( "__package" );
         public static readonly Directory Source = WorkingFolder.SubFolder( "source" );
+
         public static readonly Directory Lib = Source.SubFolder( "packages" );
         public static readonly Directory Tools = WorkingFolder.SubFolder( "tools" );
     }
@@ -36,7 +37,10 @@ namespace BuildFiles
             public static readonly File ProjectFile = Folder.File( "Dwolla.Checkout.csproj" );
             public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "Dwolla.Checkout" );
             public static readonly File OutputDll = OutputDirectory.File( "Dwolla.Checkout.dll" );
-            public static readonly File Package = Folders.PackageOutput.File( "Dwolla-{0}.zip".With( Properties.CommandLineProperties.Version() ) );
+            public static readonly Directory PackageDir = Folders.Package.SubFolder( "Dwolla.Checkout" );
+            
+            public static readonly File NugetSpec = Folders.Source.SubFolder(".nuget").File( "Dwolla.Checkout.nuspec" );
+            public static readonly File NugetNupkg = Folders.Package.File( "Dwolla.Checkout.{0}.nupkg".With( Properties.CommandLineProperties.Version() ) );
 
             public static readonly Action<IAssemblyInfoDetails> AssemblyInfo =
                 i =>

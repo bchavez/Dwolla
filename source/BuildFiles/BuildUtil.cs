@@ -26,10 +26,5 @@ namespace BuildFiles
                                                  return set;
                                              }, set => set );
         }
-
-        public static File GetILMerge()
-        {
-            return Folders.Lib.File( "**/ILMerge.exe" );
-        }
     }
 }

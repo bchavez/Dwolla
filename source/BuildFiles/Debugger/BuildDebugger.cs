@@ -5,9 +5,8 @@ using BuildFiles.Tasks;
 using FluentBuild;
 using FluentBuild.UtilitySupport;
 using NUnit.Framework;
-using Fasterflect;
 
-namespace BuildFiles.Debug
+namespace BuildFiles.Debugger
 {
     [TestFixture]
     public class BuildDebugger
@@ -15,7 +14,7 @@ namespace BuildFiles.Debug
         [TestFixtureSetUp]
         public void BeforeRunningTestSession()
         {
-            Directory.SetCurrentDirectory( @"..\.." );
+            Directory.SetCurrentDirectory( @"..\..\..\.." );
         }
 
         [Test]
