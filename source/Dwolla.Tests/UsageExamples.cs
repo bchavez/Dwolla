@@ -1,5 +1,4 @@
 using System;
-using Dwolla.OffSiteGateway;
 using NUnit.Framework;
 using Newtonsoft.Json;
 

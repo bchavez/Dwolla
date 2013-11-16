@@ -36,10 +36,7 @@ namespace BuildFiles
             public static readonly File ProjectFile = Folder.File( "Dwolla.csproj" );
             public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "Dwolla" );
             public static readonly File OutputDll = OutputDirectory.File( "Dwolla.dll" );
-            public static readonly Directory ILMergeDirectory = Folders.CompileOutput.SubFolder( "Dwolla.ILMerged" );
-            public static readonly File ILMergeFile = ILMergeDirectory.File( "Dwolla.dll" );
             public static readonly File Package = Folders.PackageOutput.File( "Dwolla-{0}.zip".With( Properties.CommandLineProperties.Version() ) );
-            public static readonly File ILMergePackage = Folders.PackageOutput.File( "Dwolla-{0}.ILMerge.zip".With( Properties.CommandLineProperties.Version() ) );
 
             public static readonly Action<IAssemblyInfoDetails> AssemblyInfo =
                 i =>

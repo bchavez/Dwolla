@@ -53,25 +53,7 @@ namespace BuildFiles.Tasks
 
             
             //IL MERGE
-            Projects.Dwolla.ILMergeDirectory.Create();
-            var ilMerge = new ILMerge();
-            ilMerge.SetInputAssemblies( Projects.Dwolla.OutputDirectory.Files( "**/*.dll" ).Files.ToArray() );
-            ilMerge.OutputFile = Projects.Dwolla.ILMergeFile.ToString();
-            ilMerge.TargetKind = ILMerge.Kind.Dll;
-            ilMerge.Internalize = true;
 
-            ilMerge.SetTargetPlatform( "v4", Defaults.FrameworkVersion.GetPathToFrameworkInstall() );
-            ilMerge.DebugInfo = true;
-            ilMerge.Merge();
-
-
-            Task.Run.Zip.Compress( z =>
-                {
-                    z.SourceFolder( Projects.Dwolla.ILMergeDirectory );
-                    z.To( Projects.Dwolla.ILMergePackage );
-                } );
-
-            Defaults.Logger.Write( "RESULTS", "{0}", Projects.Dwolla.ILMergePackage.ToString() );
         }
 
     }
