@@ -1,9 +1,0 @@
-GitHub-EnableAgent.bat
-syntax: regexp
-(?=_ReSharper).+
-(?=/obj/).+
-(?=/bin/).+
-.+(?=.user)
-(?=__compile).+
-tools/fb/ILMerge.exe
-(?=__package).+
