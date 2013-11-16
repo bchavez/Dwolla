@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Dwolla.Offsite;
 using FluentAssertions;
 using NUnit.Framework;
 using Newtonsoft.Json;

@@ -1,6 +1,6 @@
 using RestSharp;
 
-namespace Dwolla.Serialization
+namespace Dwolla.Offsite.Serialization
 {
     public static class ExtensionsForRestClient
     {

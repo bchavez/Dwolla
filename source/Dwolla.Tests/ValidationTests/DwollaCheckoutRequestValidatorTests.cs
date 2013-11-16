@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
-using Dwolla.Validators;
+using Dwolla.Offsite;
+using Dwolla.Offsite.Validators;
 using FluentAssertions;
 using FluentValidation.Attributes;
 using FluentValidation.TestHelper;
