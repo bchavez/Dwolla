@@ -71,6 +71,7 @@ namespace Dwolla.Checkout.Tests
   ""Secret"": null,
   ""Callback"": ""http://www.example.com/order-callback"",
   ""Redirect"": null,
+  ""AllowGuestCheckout"": false,
   ""AllowFundingSources"": false,
   ""OrderId"": ""MyOrderTest"",
   ""Test"": false,

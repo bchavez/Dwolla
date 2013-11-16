@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Dwolla.Checkout.Validators;
 using FluentAssertions;
+using FluentValidation;
 using FluentValidation.Attributes;
 using FluentValidation.TestHelper;
 using NUnit.Framework;
@@ -60,6 +61,26 @@ namespace Dwolla.Checkout.Tests.ValidationTests
             validator.ShouldNotHaveValidationErrorFor( cr => cr.OrderId, null as string );
 
             validator.ShouldHaveValidationErrorFor( cr => cr.Secret, "" );
+        }
+
+        [Test]
+        public void allow_guest_checkout_validation()
+        {
+            var cr = new DwollaCheckoutRequest()
+                {
+                    AllowGuestCheckout = true,
+                    AllowFundingSources = false
+                };
+
+            validator.ShouldHaveValidationErrorFor( x => x.AllowFundingSources, cr );
+
+            cr.AllowGuestCheckout = true;
+            cr.AllowFundingSources = true;
+            validator.ShouldNotHaveValidationErrorFor( x => x.AllowFundingSources, cr );
+
+            cr.AllowGuestCheckout = false;
+            cr.AllowFundingSources = false;
+            validator.ShouldNotHaveValidationErrorFor( x => x.AllowFundingSources, cr );
         }
 
         [Test]

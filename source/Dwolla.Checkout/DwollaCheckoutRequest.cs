@@ -15,15 +15,19 @@ namespace Dwolla.Checkout
         /// <remarks>Required: Yes</remarks>
         public string Secret { get; set; }
 
-        /// <summary>URL to POST the transaction response after the user authorizes the purchase. If not provided, will default to registered Payment Callback URL.</summary>
+        /// <summary>URL to POST the transaction response to after the user authorizes the purchase. If not provided, will default to the Payment Callback URL set for the consumer application. If no default found, results in error.</summary>
         /// <remarks>Required: No</remarks>
         public Uri Callback { get; set; }
 
-        /// <summary>URL to return the user to after they authorize the purchase. If not provided, will default to registered Payment Redirect URL. If no default found, results in error.</summary>
+        /// <summary>URL to return the user to after they authorize or cancel the purchase. If not provided, will default to the Payment Redirect URL set for the consumer application. If no default found, results in error.</summary>
         /// <remarks>Required: No</remarks>
         public Uri Redirect { get; set; }
 
-        /// <summary>Flag to allow guest checkout and bank-funded payments.</summary>
+        /// <summary>Flag to "true" to enable guest checkout; enabled by default. Guest Checkout enables customers to pay directly from their bank accounts, without having to register or login to a Dwolla account. Requires AllowFundingSources to be set to "true".</summary>
+        /// <remarks>Required: No</remarks>
+        public bool AllowGuestCheckout { get; set; }
+
+        /// <summary>Flag to "true" allow the user to select funding sources other than Balance, such as ACH (bank account), or FiSync.</summary>
         /// <remarks>Required: No</remarks>
         public bool AllowFundingSources { get; set; }
 
