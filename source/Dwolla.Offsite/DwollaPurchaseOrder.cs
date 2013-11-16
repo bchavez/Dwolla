@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Dwolla.Offsite.Validators;
+using Dwolla.Gateway.Validators;
 using FluentValidation.Attributes;
 
-namespace Dwolla.Offsite
+namespace Dwolla.Gateway
 {
     [Validator( typeof( DwollaPurchaseOrderValidator ) )]
     public class DwollaPurchaseOrder

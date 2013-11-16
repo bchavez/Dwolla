@@ -1,7 +1,7 @@
-using Dwolla.Offsite.Validators;
+using Dwolla.Gateway.Validators;
 using FluentValidation.Attributes;
 
-namespace Dwolla.Offsite
+namespace Dwolla.Gateway
 {
     [Validator(typeof(DwollaOrderItemValidator))]
     public class DwollaOrderItem

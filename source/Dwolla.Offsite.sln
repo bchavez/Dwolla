@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{10A86C
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Offsite", "Dwolla.Offsite\Dwolla.Offsite.csproj", "{78C02010-859C-4B67-9E9C-5D6E39682B9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Gateway", "Dwolla.Offsite\Dwolla.Gateway.csproj", "{78C02010-859C-4B67-9E9C-5D6E39682B9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

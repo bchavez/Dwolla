@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using Dwolla.Offsite;
-using Dwolla.Offsite.Validators;
+using Dwolla.Gateway;
+using Dwolla.Gateway.Validators;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using NUnit.Framework;

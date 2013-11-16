@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using RestSharp.Serializers;
 
-namespace Dwolla.Offsite.Serialization
+namespace Dwolla.Gateway.Serialization
 {
     public class JsonNetSerializer : ISerializer
     {

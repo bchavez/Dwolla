@@ -1,5 +1,5 @@
 ﻿using System;
-using Dwolla.Offsite;
+using Dwolla.Gateway;
 using FluentAssertions;
 using FluentValidation;
 using NUnit.Framework;

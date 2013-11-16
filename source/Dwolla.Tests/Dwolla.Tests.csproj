@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dwolla.Offsite\Dwolla.Offsite.csproj">
+    <ProjectReference Include="..\Dwolla.Offsite\Dwolla.Gateway.csproj">
       <Project>{78c02010-859c-4b67-9e9c-5d6e39682b9c}</Project>
-      <Name>Dwolla.Offsite</Name>
+      <Name>Dwolla.Gateway</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

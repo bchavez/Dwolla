@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Dwolla.Offsite.Validators
+namespace Dwolla.Gateway.Validators
 {
     public class DwollaOrderItemValidator : AbstractValidator<DwollaOrderItem>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Dwolla.Offsite
+namespace Dwolla.Gateway
 {
     public static class DwollaSignatureUtil
     {

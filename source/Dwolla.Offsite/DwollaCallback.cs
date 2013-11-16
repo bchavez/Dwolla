@@ -1,4 +1,4 @@
-namespace Dwolla.Offsite
+namespace Dwolla.Gateway
 {
     public class DwollaCallback
     {

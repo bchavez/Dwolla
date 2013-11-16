@@ -8,8 +8,8 @@
     <ProjectGuid>{78C02010-859C-4B67-9E9C-5D6E39682B9C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dwolla.Offsite</RootNamespace>
-    <AssemblyName>Dwolla.Offsite</AssemblyName>
+    <RootNamespace>Dwolla.Gateway</RootNamespace>
+    <AssemblyName>Dwolla.Gateway</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
