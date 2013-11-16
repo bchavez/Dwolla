@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Tests.Web", "Dwolla.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{10A86C22-9C19-42C5-B36A-3A436EA00D8F}"
 	ProjectSection(SolutionItems) = preProject
-		NuGet\Dwolla.Checkout.nuspec = NuGet\Dwolla.Checkout.nuspec
+		.nuget\Dwolla.Checkout.nuspec = .nuget\Dwolla.Checkout.nuspec
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject

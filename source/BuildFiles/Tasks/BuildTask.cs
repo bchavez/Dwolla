@@ -60,8 +60,8 @@ namespace BuildFiles.Tasks
 
             Defaults.Logger.Write( "RESULTS", "Setting NuGet PUSH script" );
             var pushcmd = "{0} push {1}".With( nuget.MakeRelative().ToString(), Path.Get(Projects.DwollaCheckout.NugetNupkg.ToString()).MakeRelative().ToString() );
-            Defaults.Logger.Write( "RESULTS", pushcmd );
-
+            //Defaults.Logger.Write( "RESULTS", pushcmd );
+            System.IO.File.WriteAllText( "nuget.push.bat", pushcmd );
         }
 
     }
