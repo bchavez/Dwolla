@@ -27,7 +27,6 @@ namespace Dwolla.Checkout.Validators
                 .Equal(true)
                 .When( cr => cr.AllowGuestCheckout )
                 .WithMessage( "The 'AllowFundingSources' should be 'true' when 'AllowGuestCheckout' is enabled. See off-site gateway documentation for more information." );
-            
 
             RuleFor( cr => cr.OrderId ).Length( 1, 100 )
                 .Unless( cr => cr.OrderId == null );

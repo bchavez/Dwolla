@@ -4,7 +4,7 @@ Dwolla .NET/C# Library
 
 Project Description
 -------------------
-A .NET implementation for the Dwolla API.
+A .NET implementation for the Dwolla Checkout (off-site gateway) API.
 
 ### License
 * [MIT License](https://github.com/bchavez/Dwolla/blob/master/LICENSE)

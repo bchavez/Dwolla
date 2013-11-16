@@ -27,16 +27,16 @@ namespace BuildFiles.Tasks
 
             Task.CreateAssemblyInfo.Language.CSharp( aid =>
                 {
-                    Projects.Dwolla.AssemblyInfo( aid );
+                    Projects.DwollaCheckout.AssemblyInfo( aid );
                     aid.OutputPath( assemblyInfoFile );
                 } );
 
             Task.Build.MsBuild( msb =>
                 {
                     msb.Configuration( "Release" )
-                       .ProjectOrSolutionFilePath( Projects.Dwolla.ProjectFile )
+                       .ProjectOrSolutionFilePath( Projects.DwollaCheckout.ProjectFile )
                        .AddTarget( "Rebuild" )
-                       .OutputDirectory( Projects.Dwolla.OutputDirectory );
+                       .OutputDirectory( Projects.DwollaCheckout.OutputDirectory );
                 });
 
             assemblyInfoFile.Delete( OnError.Continue );
@@ -45,11 +45,11 @@ namespace BuildFiles.Tasks
 
             Task.Run.Zip.Compress( z =>
                 {
-                    z.SourceFolder( Projects.Dwolla.OutputDirectory );
-                    z.To( Projects.Dwolla.Package );
+                    z.SourceFolder( Projects.DwollaCheckout.OutputDirectory );
+                    z.To( Projects.DwollaCheckout.Package );
                 } );
 
-            Defaults.Logger.Write( "RESULTS", "{0}", Projects.Dwolla.Package.ToString() );
+            Defaults.Logger.Write( "RESULTS", "{0}", Projects.DwollaCheckout.Package.ToString() );
 
             
             //IL MERGE

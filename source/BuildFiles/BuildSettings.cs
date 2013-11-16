@@ -28,21 +28,21 @@ namespace BuildFiles
                .Description( "http://www.github.com/bchavez/Dwolla" );
         }
 
-        public static readonly File SolutionFile = Folders.Source.File( "Dwolla.sln" );
+        public static readonly File SolutionFile = Folders.Source.File( "Dwolla.Checkout.sln" );
 
-        public class Dwolla
+        public class DwollaCheckout
         {
-            public static readonly Directory Folder = Folders.Source.SubFolder( "Dwolla" );
-            public static readonly File ProjectFile = Folder.File( "Dwolla.csproj" );
-            public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "Dwolla" );
-            public static readonly File OutputDll = OutputDirectory.File( "Dwolla.dll" );
+            public static readonly Directory Folder = Folders.Source.SubFolder( "Dwolla.Checkout" );
+            public static readonly File ProjectFile = Folder.File( "Dwolla.Checkout.csproj" );
+            public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "Dwolla.Checkout" );
+            public static readonly File OutputDll = OutputDirectory.File( "Dwolla.Checkout.dll" );
             public static readonly File Package = Folders.PackageOutput.File( "Dwolla-{0}.zip".With( Properties.CommandLineProperties.Version() ) );
 
             public static readonly Action<IAssemblyInfoDetails> AssemblyInfo =
                 i =>
                     {
-                        i.Title( "Dwolla API for .NET" )
-                         .Product( "Dwolla API" );
+                        i.Title( "Dwolla Checkout API for .NET" )
+                         .Product( "Dwolla Checkout API" );
 
                         GlobalAssemblyInfo( i );
                     };
@@ -50,7 +50,7 @@ namespace BuildFiles
 
         public class Tests
         {
-            public static readonly Directory Folder = Folders.Source.SubFolder( "Dwolla.Tests" );
+            public static readonly Directory Folder = Folders.Source.SubFolder( "Dwolla.Checkout.Tests" );
         }
     }
 
