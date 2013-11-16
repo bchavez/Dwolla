@@ -1,13 +1,13 @@
 using System;
 using System.Configuration;
 using System.Net;
-using Dwolla.Gateway.Serialization;
-using Dwolla.Gateway.Validators;
+using Dwolla.Checkout.Serialization;
+using Dwolla.Checkout.Validators;
 using FluentValidation;
 using FluentValidation.Attributes;
 using RestSharp;
 
-namespace Dwolla.Gateway
+namespace Dwolla.Checkout
 {
     [Validator(typeof(DwollaServerCheckoutApiValidator))]
     public class DwollaServerCheckoutApi

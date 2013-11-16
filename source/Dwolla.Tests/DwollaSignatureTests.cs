@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Dwolla.Gateway;
+using Dwolla.Checkout;
 using FluentAssertions;
 using NUnit.Framework;
 

@@ -1,9 +1,9 @@
-using Dwolla.Gateway.Validators;
+using Dwolla.Checkout.Validators;
 using FluentValidation.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Dwolla.Gateway
+namespace Dwolla.Checkout
 {
     [Validator( typeof( DwollaCheckoutResponseValidator ) )]
     public class DwollaCheckoutResponse

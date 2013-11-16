@@ -1,8 +1,8 @@
 using System;
-using Dwolla.Gateway.Validators;
+using Dwolla.Checkout.Validators;
 using FluentValidation.Attributes;
 
-namespace Dwolla.Gateway
+namespace Dwolla.Checkout
 {
     [Validator( typeof( DwollaCheckoutRequestValidator ) )]
     public class DwollaCheckoutRequest

@@ -1,6 +1,6 @@
 using System;
-using Dwolla.Gateway;
-using Dwolla.Gateway.Validators;
+using Dwolla.Checkout;
+using Dwolla.Checkout.Validators;
 using FluentAssertions;
 using FluentValidation;
 using NUnit.Framework;

@@ -1,6 +1,6 @@
 using RestSharp;
 
-namespace Dwolla.Gateway.Serialization
+namespace Dwolla.Checkout.Serialization
 {
     public static class ExtensionsForRestClient
     {

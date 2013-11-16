@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Dwolla.Gateway.Validators
+namespace Dwolla.Checkout.Validators
 {
     public class DwollaCheckoutResponseValidator : AbstractValidator<DwollaCheckoutResponse>
     {

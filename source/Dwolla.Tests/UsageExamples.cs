@@ -1,5 +1,5 @@
 using System;
-using Dwolla.Gateway;
+using Dwolla.Checkout;
 using NUnit.Framework;
 using Newtonsoft.Json;
 

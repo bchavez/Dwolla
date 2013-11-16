@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Dwolla.Gateway;
+using Dwolla.Checkout;
 using FluentAssertions;
 using NUnit.Framework;
 using Newtonsoft.Json;

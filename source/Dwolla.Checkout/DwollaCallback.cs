@@ -1,4 +1,4 @@
-namespace Dwolla.Gateway
+namespace Dwolla.Checkout
 {
     public class DwollaCallback
     {
