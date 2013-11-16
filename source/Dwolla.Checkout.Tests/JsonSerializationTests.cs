@@ -1,11 +1,9 @@
 using System;
-using System.IO;
-using Dwolla.Checkout;
 using FluentAssertions;
-using NUnit.Framework;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
-namespace Dwolla.Tests
+namespace Dwolla.Checkout.Tests
 {
     [TestFixture]
     public class JsonSerializationTests

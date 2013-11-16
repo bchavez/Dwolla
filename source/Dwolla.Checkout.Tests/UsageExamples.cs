@@ -1,9 +1,8 @@
 using System;
-using Dwolla.Checkout;
-using NUnit.Framework;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
-namespace Dwolla.Tests
+namespace Dwolla.Checkout.Tests
 {
     [TestFixture]
     [Explicit]

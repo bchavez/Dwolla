@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
-using Dwolla.Checkout;
 using Dwolla.Checkout.Validators;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 using NUnit.Framework;
 
-namespace Dwolla.Tests.ValidationTests
+namespace Dwolla.Checkout.Tests.ValidationTests
 {
     [TestFixture]
     public class DwollaPurchaseOrderValidatorTests

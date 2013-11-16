@@ -3,11 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Dwolla.Checkout;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Dwolla.Tests
+namespace Dwolla.Checkout.Tests
 {
     [TestFixture]
     public class DwollaSignatureTests

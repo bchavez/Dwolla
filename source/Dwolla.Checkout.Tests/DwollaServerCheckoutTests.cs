@@ -1,10 +1,9 @@
 ﻿using System;
-using Dwolla.Checkout;
 using FluentAssertions;
 using FluentValidation;
 using NUnit.Framework;
 
-namespace Dwolla.Tests
+namespace Dwolla.Checkout.Tests
 {
     [TestFixture]
     public class DwollaServerCheckoutTests
