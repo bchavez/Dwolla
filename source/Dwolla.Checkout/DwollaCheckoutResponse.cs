@@ -1,4 +1,6 @@
+using System;
 using Dwolla.Checkout.Validators;
+using FluentValidation;
 using FluentValidation.Attributes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -23,6 +25,11 @@ namespace Dwolla.Checkout
 
         /// <summary>The error message if the Result is a Failure.</summary>
         public string Message { get; set; }
+
+        public string GetRedirectUrl()
+        {
+            return DwollaServerCheckoutApi.CheckoutUrl.Replace( "{CheckoutId}", CheckoutId );
+        }
     }
 
     public enum DwollaCheckoutResponseResult

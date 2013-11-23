@@ -29,7 +29,7 @@ namespace Dwolla.Checkout.Tests
             o.TestMode.Should().BeTrue();
             o.TransactionId.Should().Be( 1 );
             o.CheckoutId.Should().Be( "C3D4DC4F-5074-44CA-8639-B679D0A70803" );
-            o.Status.Should().Be( DwollaCallbackStatus.Completed );
+            o.Status.Should().Be( DwollaStatus.Completed );
             o.Signature.Should().Be( "7f42ba58ff0d20486fdc2634745e8e7c92cb6321" );
         }
 

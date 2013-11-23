@@ -91,15 +91,6 @@ var checkoutRequest = new DwollaCheckoutRequest{
                                                  },
                      };
 
-//Optional: Validate your checkout request before
-//          sending the request to Dwolla.
-var preflightCheck = api.ValidatorFactory.GetValidator<DwollaCheckoutRequest>()
-    .Validate( checkoutRequest );
-if( !preflightCheck.IsValid )
-{
-    //Check preflightCheck.Errors for a list of validation errors.
-}
-
 //Send the request to Dwolla.
 var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
 

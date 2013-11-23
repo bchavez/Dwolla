@@ -65,6 +65,7 @@
     <Compile Include="DwollaCustomerInfo.cs" />
     <Compile Include="DwollaOrderItem.cs" />
     <Compile Include="DwollaPurchaseOrder.cs" />
+    <Compile Include="DwollaRedirect.cs" />
     <Compile Include="DwollaServerCheckoutApi.cs" />
     <Compile Include="DwollaSignatureUtil.cs" />
     <Compile Include="Validators\DwollaCheckoutRequestValidator.cs" />

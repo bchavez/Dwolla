@@ -88,11 +88,11 @@ namespace Dwolla.Checkout.Tests
             {
                 //Update the payment status in your database.
 
-                if( receivedCallback.Status == DwollaCallbackStatus.Completed )
+                if( receivedCallback.Status == DwollaStatus.Completed )
                 {
                     //Payment was successful.
                 }
-                if( receivedCallback.Status == DwollaCallbackStatus.Failed)
+                if( receivedCallback.Status == DwollaStatus.Failed)
                 {
                     //Payment was not successful.
                 }

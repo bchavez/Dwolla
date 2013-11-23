@@ -28,12 +28,13 @@ namespace Dwolla.Checkout
         {
             var hmacKey = Encoding.ASCII.GetBytes( key );
 
-            var signatureStream = new MemoryStream( Encoding.ASCII.GetBytes( data ) );
+            using ( var signatureStream = new MemoryStream( Encoding.ASCII.GetBytes( data ) ) )
+            {
+                var hex = new HMACSHA1( hmacKey ).ComputeHash( signatureStream )
+                    .Aggregate( new StringBuilder(), ( sb, b ) => sb.AppendFormat( "{0:x2}", b ), sb => sb.ToString() );
 
-            var hex = new HMACSHA1( hmacKey ).ComputeHash( signatureStream )
-                .Aggregate( new StringBuilder(), ( sb, b ) => sb.AppendFormat( "{0:x2}", b ), sb => sb.ToString() );
-
-            return hex;
+                return hex;
+            }
         }
 
         public static long UnixEpochTime( DateTime utcTime )

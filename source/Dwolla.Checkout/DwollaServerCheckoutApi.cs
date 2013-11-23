@@ -62,10 +62,8 @@ namespace Dwolla.Checkout
         /// <returns>Response by Dwolla. It is the callers responsibility to ensure the return object's Result property is 'Success'</returns>
         public virtual DwollaCheckoutResponse SendCheckoutRequest( DwollaCheckoutRequest checkoutRequest )
         {
-            if( string.IsNullOrWhiteSpace( checkoutRequest.Key ) ||
-                string.IsNullOrWhiteSpace( checkoutRequest.Secret ) )
-                this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
-                    .ValidateAndThrow( this );
+            this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
+                .ValidateAndThrow( this );
 
             if( string.IsNullOrWhiteSpace(checkoutRequest.Key) ){}
                 checkoutRequest.Key = this.AppKey;
@@ -100,6 +98,7 @@ namespace Dwolla.Checkout
             return res.Data;
         }
 
+        [Obsolete( "Use method on response to get the checkout URL: DwollaCheckoutResponse.GetRedirectUrl()" )]
         public virtual string GetCheckoutRedirectUrl(DwollaCheckoutResponse response)
         {
             this.ValidatorFactory.GetValidator<DwollaCheckoutResponse>()
