@@ -108,7 +108,7 @@ else if( checkoutResponse.Result == DwollaCheckoutResponseResult.Success)
 
 -------
 #### Handling Callbacks on Your Server
-Regardless of the method chosen to initiate payments, if a **Callback URL** was specified in the request, Dwolla will "post back" a JSON object to the **Callback URL** after the user has completed the checkout.  It is good practice to verify the authenticity of the callback to ensure the callback hasn't been spoofed.
+Regardless of the method chosen to initiate payments, if a **Callback URL** was specified in the request, Dwolla will "post back" a JSON object to the **Callback URL** after the user has completed the checkout. This callback usually happens ***asynchronously*** after the user's browser is ***redirected***.  It is good practice to verify the authenticity of the callback to ensure the callback hasn't been spoofed.
 
 ```csharp
 var jsonCallback =
@@ -130,15 +130,15 @@ var api = new DwollaServerCheckoutApi( appKey: "...", appSecret: "..." );
 
 //Verify the DwollaCallback.Singature
 //to ensure this is a valid HTTP POST from Dwolla.
-if( api.VerifyCallbackAuthenticity(receivedCallback) )
+if( api.VerifyAuthenticity(receivedCallback) )
 {
     //Update the payment status in your database.
 
-    if( receivedCallback.Status == DwollaCallbackStatus.Completed )
+    if( receivedCallback.Status == DwollaStatus.Completed )
     {
         //Payment was successful.
     }
-    else if( receivedCallback.Status == DwollaCallbackStatus.Failed)
+    else if( receivedCallback.Status == DwollaStatus.Failed)
     {
         //Payment was not successful.
     }
@@ -148,6 +148,30 @@ else
     //Log -- Possible URL tampering or trying to spoof their payment.
 }
 ```
+
+-------
+#### Handling Redirects on Your Server
+Optionally, you can also handle the user's browser redirect from Dwolla too. Handling the URL parameters from the user's browser on an MVC controller is show below:
+
+```csharp
+public ActionResult Handle_Dwolla_BrowserRedirect(DwollaRedirect redirect)
+{
+    if( DwollaGateway.VerifyAuthenticity( redirect ) )
+    {
+        if( redirect.Status == DwollaStatus.Completed )
+        {
+            //The User completed the transaction.
+        }
+        else
+        {
+            //The transaction failed.
+        }
+    }
+    return new HttpStatusCodeResult( HttpStatusCode.BadRequest );
+}
+```
+
+ 
 
 Reference
 ---------
