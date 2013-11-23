@@ -154,9 +154,11 @@ else
 Optionally, you can also handle the user's browser redirect from Dwolla too. Handling the URL parameters from the user's browser on an MVC controller is show below:
 
 ```csharp
+var api = new DwollaServerCheckoutApi( appKey: "...", appSecret: "..." );
+
 public ActionResult Handle_Dwolla_BrowserRedirect(DwollaRedirect redirect)
 {
-    if( DwollaGateway.VerifyAuthenticity( redirect ) )
+    if( api.VerifyAuthenticity( redirect ) )
     {
         if( redirect.Status == DwollaStatus.Completed )
         {
