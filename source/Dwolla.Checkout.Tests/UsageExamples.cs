@@ -84,7 +84,7 @@ namespace Dwolla.Checkout.Tests
 
             //Verify the DwollaCallback.Singature
             //to ensure this is a valid HTTP POST from Dwolla.
-            if( api.VerifyCallbackAuthenticity(receivedCallback) )
+            if( api.VerifyAuthenticity(receivedCallback) )
             {
                 //Update the payment status in your database.
 

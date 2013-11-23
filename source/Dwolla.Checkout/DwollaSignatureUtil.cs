@@ -17,11 +17,11 @@ namespace Dwolla.Checkout
             return GetHMACSHA1InHex( appKey, signatureData );
         }
 
-        public static bool VerifyCallbackSignature( string appSecret, string receivedCallbackSignature, string receivedCheckoutId, decimal receivedAmount )
+        public static bool VerifySignature( string appSecret, string receivedSignature, string receivedCheckoutId, decimal receivedAmount )
         {
             var signatureData = String.Format( "{0}&{1}", receivedCheckoutId, receivedAmount );
 
-            return receivedCallbackSignature == GetHMACSHA1InHex( appSecret, signatureData );
+            return receivedSignature == GetHMACSHA1InHex( appSecret, signatureData );
         }
 
         internal static string GetHMACSHA1InHex(string key, string data )

@@ -107,12 +107,19 @@ namespace Dwolla.Checkout
             return CheckoutUrl.Replace( "{CheckoutId}", response.CheckoutId );
         }
         
-        public virtual bool VerifyCallbackAuthenticity(DwollaCallback receivedCallback)
+        public virtual bool VerifyAuthenticity(DwollaCallback receivedCallback)
         {
             this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
                 .ValidateAndThrow( this );
 
-            return DwollaSignatureUtil.VerifyCallbackSignature( this.AppSecret, receivedCallback.Signature, receivedCallback.CheckoutId, receivedCallback.Amount );
+            return DwollaSignatureUtil.VerifySignature( this.AppSecret, receivedCallback.Signature, receivedCallback.CheckoutId, receivedCallback.Amount );
+        }
+        public virtual bool VerifyAuthenticity( DwollaRedirect receivedRedirect )
+        {
+            this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
+                .ValidateAndThrow( this );
+
+            return DwollaSignatureUtil.VerifySignature( this.AppSecret, receivedRedirect.Signature, receivedRedirect.CheckoutId, receivedRedirect.Amount );
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Dwolla.Checkout.Tests
                             Signature = "7f42ba58ff0d20486fdc2634745e8e7c92cb6321"
                         };
 
-            DwollaSignatureUtil.VerifyCallbackSignature( "test", c.Signature, c.CheckoutId, c.Amount )
+            DwollaSignatureUtil.VerifySignature( "test", c.Signature, c.CheckoutId, c.Amount )
                 .Should().BeTrue();
         }
     }

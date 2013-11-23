@@ -1,1 +1,1 @@
-source\BuildFiles\fb.exe source\BuildFiles\BuildFiles.dll -c:BuildTask -p:Version="0.3.3.0"
+source\BuildFiles\fb.exe source\BuildFiles\BuildFiles.dll -c:BuildTask -p:Version="0.3.4.2"
