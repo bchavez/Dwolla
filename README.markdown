@@ -12,6 +12,13 @@ A .NET implementation for the Dwolla Checkout (off-site gateway) API.
 ### Requirements
 * .NET 4.0
 
+### Download & Install
+via Nuget [Dwolla.Checkout](https://www.nuget.org/packages/Dwolla.Checkout/)
+
+```
+Install-Package Dwolla.Checkout
+```
+
 Building
 --------
 * Download the source code.

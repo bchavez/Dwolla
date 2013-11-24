@@ -21,7 +21,7 @@ namespace Dwolla.Checkout.Tests
 
             var api = new DwollaServerCheckoutApi( "test", "test" );
 
-            api.VerifyCallbackAuthenticity( c )
+            api.VerifyAuthenticity( c )
                .Should().BeTrue();
         }
 
