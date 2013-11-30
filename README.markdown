@@ -83,20 +83,20 @@ var api = new DwollaServerCheckoutApi( appKey:"...", appSecret: "..." );
 
 //Create a checkout request
 var checkoutRequest = new DwollaCheckoutRequest
-                   {
-                     OrderId = "MyOrderTest",
-                     Callback = new Uri("http://www.example.com/order-callback")
-                     PurchaseOrder = new DwollaPurchaseOrder
-                                {
-                                 DestinationId = "812-111-1111",
-                                 OrderItems = { 
-                                    new DwollaOrderItem( name: "Candy Bar", price: 25.00m, quantity: 1 )
-                                    {
-                                       Description = "Expensive Candy Bar",
-                                    }
-                                  },     
-                                },
-                  };
+              {
+                OrderId = "MyOrderTest",
+                Callback = new Uri("http://www.example.com/order-callback")
+                PurchaseOrder = new DwollaPurchaseOrder
+                           {
+                            DestinationId = "812-111-1111",
+                            OrderItems = { 
+                               new DwollaOrderItem( name: "Candy Bar", price: 25.00m, quantity: 1 )
+                               {
+                                  Description = "Expensive Candy Bar",
+                               }
+                             },     
+                           },
+             };
 
 //Send the request to Dwolla.
 var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
