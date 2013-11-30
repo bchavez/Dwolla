@@ -16,7 +16,9 @@ A .NET implementation for the Dwolla Checkout (off-site gateway) API.
 via Nuget [Dwolla.Checkout](https://www.nuget.org/packages/Dwolla.Checkout/)
 
 ```
+
 Install-Package Dwolla.Checkout
+
 ```
 
 Building
@@ -80,23 +82,21 @@ The general process of communicating with Dwolla in a Server-to-Server Checkout 
 var api = new DwollaServerCheckoutApi( appKey:"...", appSecret: "..." );
 
 //Create a checkout request
-var checkoutRequest = new DwollaCheckoutRequest{
-                             OrderId = "MyOrderTest",
-                             Callback = new Uri("http://www.example.com/order-callback")
-                             PurchaseOrder = new DwollaPurchaseOrder
-                                                 {
-                                                   DestinationId = "812-111-1111",
-                                                   OrderItems = { 
-                                                      new DwollaOrderItem
-                                                          ( name: "Candy Bar",
-                                                            price: 25.00m,
-                                                            quantity: 1 )
-                                                      {
-                                                         Description = "Expensive Candy Bar",
-                                                      }
-                                                   },     
-                                                 },
-                     };
+var checkoutRequest = new DwollaCheckoutRequest
+                   {
+                     OrderId = "MyOrderTest",
+                     Callback = new Uri("http://www.example.com/order-callback")
+                     PurchaseOrder = new DwollaPurchaseOrder
+                                {
+                                 DestinationId = "812-111-1111",
+                                 OrderItems = { 
+                                    new DwollaOrderItem( name: "Candy Bar", price: 25.00m, quantity: 1 )
+                                    {
+                                       Description = "Expensive Candy Bar",
+                                    }
+                                  },     
+                                },
+                  };
 
 //Send the request to Dwolla.
 var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
@@ -107,7 +107,7 @@ if( checkoutResponse.Result == DwollaCheckoutResponseResult.Failure )
 }
 else if( checkoutResponse.Result == DwollaCheckoutResponseResult.Success)
 {
-    var redirectUrl = api.GetCheckoutRedirectUrl( checkoutResponse );
+    var redirectUrl = checkoutResponse.GetRedirectUrl();
     //Send HTTP Redirect to browser so the 
     //customer can finish the checkout process
 }

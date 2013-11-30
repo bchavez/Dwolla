@@ -26,6 +26,7 @@ namespace Dwolla.Checkout
         /// <summary>The error message if the Result is a Failure.</summary>
         public string Message { get; set; }
 
+        /// <summary>Returns the URL for the customer's browser to complete the checkout process.</summary>
         public string GetRedirectUrl()
         {
             return DwollaServerCheckoutApi.CheckoutUrl.Replace( "{CheckoutId}", CheckoutId );
