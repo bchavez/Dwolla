@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentValidation;
 
 namespace Dwolla.Checkout.Validators
@@ -38,6 +39,10 @@ namespace Dwolla.Checkout.Validators
             RuleFor( po => po.CustomerInfo )
                 .SetValidator( new DwollaCustomerInfoValidator() )
                 .WithName( "PurchaseOrder.CustomerInfo" );
+
+            RuleFor(po => po.Metadata)
+                .SetCollectionValidator(new DwollaMetadataValidator())
+                .WithName("PurchaseOrder.Metadata");
         }
         protected virtual bool HasValidFacilitatorAmount(DwollaPurchaseOrder po, decimal? facilitatorAmount )
         {

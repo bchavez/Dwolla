@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Dwolla.Checkout.Validators;
 using FluentAssertions;
 using FluentValidation.TestHelper;
@@ -141,6 +143,49 @@ namespace Dwolla.Checkout.Tests.ValidationTests
         }
 
         [Test]
+        public void ensure_valid_metadata()
+        {
+            validator.ShouldHaveChildValidator(po => po.Metadata, typeof(DwollaMetadataValidator));
+
+            var order = new DwollaPurchaseOrder
+            {
+                CustomerInfo = new DwollaCustomerInfo
+                {
+                    FirstName = "Brian",
+                    LastName = "Chavez",
+                    City = "Beverly Hills",
+                    State = "CA",
+                    Zip = "90210",
+                    Email = "bchavez@valid.com",
+                },
+                OrderItems =
+                        {
+                            new DwollaOrderItem( price: 25.00m, quantity: 1, name: "Candy Bar" )
+                                {
+                                    Description = "Super Expensive Candy Bar"
+                                }
+                        },
+                DestinationId = "123-123-1234",
+                FacilitatorAmount = 5.00m,
+            };
+
+            order.Metadata.Add("f",
+                "asdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdf");
+
+            validator.Validate(order).IsValid.Should().BeFalse();
+
+            order.Metadata.Clear();
+            order.Metadata.Add("asdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdfasdfasdfasdfjwjwfjwjfwahsdfasdf","v");
+
+            validator.Validate(order).IsValid.Should().BeFalse();
+
+            order.Metadata.Clear();
+            order.Metadata.Add("key", "value");
+
+            validator.Validate(order).IsValid.Should().BeTrue();
+        }
+
+        [Test]
         [Explicit]
         public void error_message_output()
         {
@@ -151,9 +196,9 @@ namespace Dwolla.Checkout.Tests.ValidationTests
                             FirstName = "Brian",
                             LastName = "Chavez",
                             City = "Beverly Hills",
-                            State = "Ca",
+                            State = "CA",
                             Zip = "90210",
-                            Email = "bchavez-invalid",
+                            Email = "bchavez@valid.com",
                         },
                     OrderItems =
                         {
@@ -165,6 +210,7 @@ namespace Dwolla.Checkout.Tests.ValidationTests
                     DestinationId = "123-123-1234",
                     FacilitatorAmount = 5.00m,
                 };
+            //order.Metadata.Add("zzzzzzzzzzzzzzzz", "fffffffffff");
 
             var vr = validator.Validate( order );
             vr.Errors.ToList().ForEach( x => Console.WriteLine( x.ToString() ) );

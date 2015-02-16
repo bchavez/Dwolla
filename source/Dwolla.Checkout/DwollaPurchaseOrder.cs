@@ -11,6 +11,7 @@ namespace Dwolla.Checkout
         public DwollaPurchaseOrder()
         {
             this.OrderItems = new List<DwollaOrderItem>();
+            this.Metadata = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -62,5 +63,11 @@ namespace Dwolla.Checkout
         /// <summary>Note to attach to the transaction. Limited to 250 characters.</summary>
         /// <remarks>Required: No</remarks>
         public string Notes { get; set; }
+
+        /// <summary>
+        /// Optional. A JSON object of maximum 10 key-value pairs with which to store metadata in. Keys and values must be strings of max length 255.
+        /// </summary>
+        /// <remarks>Required: No</remarks>
+        public Dictionary<string, string> Metadata { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Dwolla.Checkout
         /// <summary>Dwolla application secret</summary>
         public virtual string AppSecret { get; set; }
 
-        public const string RequestUrl = "https://www.dwolla.com/payment/request";
+        public const string RequestUrl = "https://www.dwolla.com/oauth/rest/offsitegateway/checkouts";
         public const string CheckoutUrl = "https://www.dwolla.com/payment/checkout/{CheckoutId}";
 
         /// <summary>
@@ -65,10 +65,10 @@ namespace Dwolla.Checkout
             this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
                 .ValidateAndThrow( this );
 
-            if( string.IsNullOrWhiteSpace(checkoutRequest.Key) ){}
-                checkoutRequest.Key = this.AppKey;
-            if( string.IsNullOrWhiteSpace(checkoutRequest.Secret))
-                checkoutRequest.Secret = this.AppSecret;
+            if( string.IsNullOrWhiteSpace(checkoutRequest.ClientId) ){}
+                checkoutRequest.ClientId = this.AppKey;
+            if( string.IsNullOrWhiteSpace(checkoutRequest.ClientSecret))
+                checkoutRequest.ClientSecret = this.AppSecret;
 
             checkoutRequest.Test = this.TestMode;
 

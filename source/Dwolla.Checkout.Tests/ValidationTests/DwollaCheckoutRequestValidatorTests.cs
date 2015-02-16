@@ -23,18 +23,18 @@ namespace Dwolla.Checkout.Tests.ValidationTests
         [Test]
         public void valid_key()
         {
-            validator.ShouldNotHaveValidationErrorFor( cr => cr.Key, "abcdefg" );
+            validator.ShouldNotHaveValidationErrorFor( cr => cr.ClientId, "abcdefg" );
 
-            validator.ShouldHaveValidationErrorFor( cr => cr.Key, null as string );
-            validator.ShouldHaveValidationErrorFor( cr => cr.Key, string.Empty );
+            validator.ShouldHaveValidationErrorFor( cr => cr.ClientId, null as string );
+            validator.ShouldHaveValidationErrorFor( cr => cr.ClientId, string.Empty );
         }
         [Test]
         public void valid_secret()
         {
-            validator.ShouldNotHaveValidationErrorFor( cr => cr.Secret, "abcdefg" );
+            validator.ShouldNotHaveValidationErrorFor( cr => cr.ClientSecret, "abcdefg" );
 
-            validator.ShouldHaveValidationErrorFor( cr => cr.Secret, null as string );
-            validator.ShouldHaveValidationErrorFor( cr => cr.Secret, string.Empty );
+            validator.ShouldHaveValidationErrorFor( cr => cr.ClientSecret, null as string );
+            validator.ShouldHaveValidationErrorFor( cr => cr.ClientSecret, string.Empty );
         }
 
 
@@ -60,7 +60,7 @@ namespace Dwolla.Checkout.Tests.ValidationTests
             validator.ShouldNotHaveValidationErrorFor( cr => cr.OrderId, "A1B2C3" );
             validator.ShouldNotHaveValidationErrorFor( cr => cr.OrderId, null as string );
 
-            validator.ShouldHaveValidationErrorFor( cr => cr.Secret, "" );
+            validator.ShouldHaveValidationErrorFor( cr => cr.ClientSecret, "" );
         }
 
         [Test]
@@ -84,6 +84,19 @@ namespace Dwolla.Checkout.Tests.ValidationTests
         }
 
         [Test]
+        public void setting_additional_funding_sources_requires_allow_funding_sources_to_be_true()
+        {
+            var cr = new DwollaCheckoutRequest()
+                {
+                    AllowFundingSources = false,
+                    AdditionalFundingSources = FundingSource.Banks | FundingSource.Credit
+                };
+            validator.ShouldHaveValidationErrorFor(x => x.AllowFundingSources, cr);
+            cr.AllowFundingSources = true;
+            validator.ShouldNotHaveValidationErrorFor(x => x.AllowFundingSources, cr);
+        }
+
+        [Test]
         public void purchase_order_validation()
         {
             validator.ShouldHaveValidationErrorFor( cr => cr.PurchaseOrder, null as DwollaPurchaseOrder );
@@ -101,8 +114,8 @@ namespace Dwolla.Checkout.Tests.ValidationTests
         {
             var badRequest = new DwollaCheckoutRequest
                                  {
-                                     Key = "abcdefg",
-                                     Secret = "abcdefg",
+                                     ClientId = "abcdefg",
+                                     ClientSecret = "abcdefg",
                                      OrderId = "MyOrderId1",
                                      PurchaseOrder = new DwollaPurchaseOrder
                                                          {
