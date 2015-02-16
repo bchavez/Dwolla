@@ -12,12 +12,18 @@
     <description>A .NET implementation for the Dwolla Checkout (off-site gateway) API for online payments. The Off-Site Gateway API is a way to seamlessly pay for goods or services online utilizing Dwolla's low-cost payment processing platform.</description>
     <summary>A .NET implementation for the Dwolla Checkout (off-site gateway) API for online payments. The Off-Site Gateway API is a way to seamlessly pay for goods or services online utilizing Dwolla's low-cost payment processing platform. See Dwolla, http://www.dwolla.com, for more information. Project site: https://github.com/bchavez/Dwolla</summary>
       <releaseNotes>
-          Current: v0.3.4.2 - 11/22/2013:
+          Current: v0.3.5.0 - 2/15/2015:
+          * Using new API off-site gateway endpoint.
+          * Support for ProfileID.
+          * Support for CheckoutWithApi.
+          * Support for AdditionalFundingSources.
+
+          v0.3.4.2 - 11/22/2013:
           * New fields added to Callback.
           * New Redirect MVC type for capturing redirect parameters.
           * Added Helper method to verify redirect authenticity.
           * Slight refactoring of names to check callback and redirect types.
-          * Renamed VerifyCallbackAuthenticity to VerifyAuthenticity
+          * Renamed VerifyCallbackAuthenticity to VerifyAuthenticity.
 
           v0.3.3.0 - 11/16/2013:
           * Added support for AllowGuestCheckout.
