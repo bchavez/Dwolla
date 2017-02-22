@@ -12,6 +12,7 @@ namespace Dwolla.Checkout
     [Validator(typeof(DwollaServerCheckoutApiValidator))]
     public class DwollaServerCheckoutApi
     {
+        private readonly WebProxy proxy;
         public virtual IValidatorFactory ValidatorFactory { get; set; }
 
         /// <summary>Dwolla Test Mode Flag. All requests made with this API will enable the testmode flag in the Dwolla request.</summary>
@@ -38,17 +39,21 @@ namespace Dwolla.Checkout
         ///   &lt;appSettings&gt;
         /// </example>
         public DwollaServerCheckoutApi() : this( 
-            ConfigurationManager.AppSettings["dwolla_key"],
-            ConfigurationManager.AppSettings["dwolla_secret"],
+            ConfigurationManager.AppSettings[DwollaKey],
+            ConfigurationManager.AppSettings[DwollaSecret],
             Convert.ToBoolean( ConfigurationManager.AppSettings["dwolla_testmode"] ?? "false" ) )
         {
         }
 
-        public DwollaServerCheckoutApi( string appKey, string appSecret, bool testMode = false )
+        private const string DwollaKey = "dwolla_key";
+        private const string DwollaSecret = "dwolla_secret";
+
+        public DwollaServerCheckoutApi( string appKey = "", string appSecret = "", bool testMode = false, WebProxy proxy = null)
         {
+            this.proxy = proxy;
             this.TestMode = testMode;
-            this.AppKey = appKey;
-            this.AppSecret = appSecret;
+            this.AppKey = !string.IsNullOrWhiteSpace(appKey) ? appKey : ConfigurationManager.AppSettings[DwollaKey];
+            this.AppSecret = !string.IsNullOrEmpty(appSecret) ? appSecret : ConfigurationManager.AppSettings[DwollaSecret];
 
             this.ValidatorFactory = new AttributedValidatorFactory();
 
@@ -81,7 +86,10 @@ namespace Dwolla.Checkout
         /// <summary>Executes the Dwolla Checkout REST Request. This method can be overridden if you wish to use a different REST library to execute the actual request. </summary>
         protected virtual DwollaCheckoutResponse ExecuteRestRequest( DwollaCheckoutRequest checkoutRequest)
         {
-            var client = new RestClient();
+            var client = new RestClient()
+                {
+                    Proxy = this.proxy
+                };
 
             var req = new RestRequest( RequestUrl, Method.POST )
                 {

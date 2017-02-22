@@ -5,10 +5,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitleAttribute("Dwolla Checkout API for .NET")]
 [assembly: AssemblyProductAttribute("Dwolla.Checkout")]
 [assembly: AssemblyCompanyAttribute("Brian Chavez")]
-[assembly: AssemblyCopyrightAttribute("Brian Chavez © 2017")]
+[assembly: AssemblyCopyrightAttribute("Brian Chavez © 2015")]
 [assembly: AssemblyVersionAttribute("0.0.0")]
 [assembly: AssemblyFileVersionAttribute("0.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 2/22/2017 7:48:09 AM")]
+[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 1/1/2015 12:00:00 AM")]
 [assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
 [assembly: AssemblyDescriptionAttribute("https://github.com/bchavez/Dwolla")]
 [assembly: InternalsVisibleToAttribute("Dwolla.Checkout.Tests")]
@@ -17,10 +17,10 @@ namespace System {
         internal const System.String AssemblyTitle = "Dwolla Checkout API for .NET";
         internal const System.String AssemblyProduct = "Dwolla.Checkout";
         internal const System.String AssemblyCompany = "Brian Chavez";
-        internal const System.String AssemblyCopyright = "Brian Chavez © 2017";
+        internal const System.String AssemblyCopyright = "Brian Chavez © 2015";
         internal const System.String AssemblyVersion = "0.0.0";
         internal const System.String AssemblyFileVersion = "0.0.0";
-        internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 2/22/2017 7:48:09 AM";
+        internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 1/1/2015 12:00:00 AM";
         internal const System.String AssemblyTrademark = "Apache License v2.0";
         internal const System.String AssemblyDescription = "https://github.com/bchavez/Dwolla";
         internal const System.String InternalsVisibleTo = "Dwolla.Checkout.Tests";

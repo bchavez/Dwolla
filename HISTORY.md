@@ -1,3 +1,6 @@
+## v1.0.1
+* Allow `WebProxy` for easier HTTP debugging.
+
 ## v1.0.0
 * Updated dependencies.
 * Added `DwollaRedirect.ErrorDescription`
