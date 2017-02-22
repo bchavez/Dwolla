@@ -12,7 +12,7 @@ namespace Dwolla.Checkout
     [Validator(typeof(DwollaServerCheckoutApiValidator))]
     public class DwollaServerCheckoutApi
     {
-        private readonly WebProxy proxy;
+        public virtual WebProxy Proxy { get; set; }
         public virtual IValidatorFactory ValidatorFactory { get; set; }
 
         /// <summary>Dwolla Test Mode Flag. All requests made with this API will enable the testmode flag in the Dwolla request.</summary>
@@ -51,7 +51,7 @@ namespace Dwolla.Checkout
 
         public DwollaServerCheckoutApi( string appKey = "", string appSecret = "", bool testMode = false, WebProxy proxy = null)
         {
-            this.proxy = proxy;
+            this.Proxy = proxy;
             this.TestMode = testMode;
             this.AppKey = !string.IsNullOrWhiteSpace(appKey) ? appKey : ConfigurationManager.AppSettings[DwollaKey];
             this.AppSecret = !string.IsNullOrEmpty(appSecret) ? appSecret : ConfigurationManager.AppSettings[DwollaSecret];
@@ -84,25 +84,39 @@ namespace Dwolla.Checkout
             return ExecuteRestRequest( checkoutRequest );
         }
 
-        /// <summary>Executes the Dwolla Checkout REST Request. This method can be overridden if you wish to use a different REST library to execute the actual request. </summary>
-        protected virtual DwollaCheckoutResponse ExecuteRestRequest( DwollaCheckoutRequest checkoutRequest)
+        protected JsonNetSerializer JsonNetSerializer = new JsonNetSerializer();
+
+        protected virtual RestClient GetRestClient()
         {
             var client = new RestClient(BaseUrl)
                 {
-                    Proxy = this.proxy
+                    Proxy = this.Proxy,
                 };
+            client.AddHandler("application/json", this.JsonNetSerializer);
+            return client;
+        }
 
-            var req = new RestRequest( RequestUrl, Method.POST )
+        protected virtual RestRequest GetRestRequest(string url)
+        {
+            return new RestRequest(url)
                 {
-                    RequestFormat = DataFormat.Json
-                }
-                .WithNewtonsoft()
-                .AddBody( checkoutRequest );
+                    RequestFormat = DataFormat.Json,
+                    JsonSerializer = this.JsonNetSerializer
+                };
+        }
+
+        /// <summary>Executes the Dwolla Checkout REST Request. This method can be overridden if you wish to use a different REST library to execute the actual request. </summary>
+        protected virtual DwollaCheckoutResponse ExecuteRestRequest( DwollaCheckoutRequest checkoutRequest)
+        {
+            var client = this.GetRestClient();
+            var req = this.GetRestRequest(RequestUrl);
+            req.Method = Method.POST;
+            req.AddBody(checkoutRequest);
 
             var res = client.Execute<DwollaCheckoutResponse>( req );
 
             if( res.ResponseStatus != ResponseStatus.Completed || res.StatusCode != HttpStatusCode.OK )
-                return new DwollaCheckoutResponse {Result = DwollaCheckoutResponseResult.Failure, Message = "Non HTTP status code received."};
+                return new DwollaCheckoutResponse {Success = false, Message = "Non HTTP status code received."};
 
             return res.Data;
         }

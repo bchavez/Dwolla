@@ -6,13 +6,13 @@ namespace Dwolla.Checkout.Validators
     {
         public DwollaCheckoutResponseValidator()
         {
-            RuleFor( cr => cr.Result )
-                .Must( r => r == DwollaCheckoutResponseResult.Success )
+            RuleFor( cr => cr.Success )
+                .Must( r => r == true)
                 .WithMessage( "The checkout request failed. Message from Dwolla's Servers: '{0}'", cr => cr.Message );
 
-            RuleFor( r => r.CheckoutId ).NotEmpty()
+            RuleFor( r => r.CheckoutId ).NotNull().NotEmpty()
                 .WithName( "CheckoutResponse.CheckoutId" )
-                .When( r=> r.Result == DwollaCheckoutResponseResult.Success);
+                .When( r => r.Success == true);
         }
     }
 }

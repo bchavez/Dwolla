@@ -36,31 +36,23 @@ namespace Dwolla.Checkout.Tests
         [Test]
         public void can_deseralize_successful_checkout_response()
         {
-            var json = @"
-{
-    'Result': 'Success',
-    'CheckoutId': 'C3D4DC4F-5074-44CA-8639-B679D0A70803'
-}";
+            var json = @"{""Success"":true,""Message"":""Success"",""Response"":{""CheckoutId"":""43957894-d8fa-41dc-a75d-c21c4ce9dcc9""},""_links"":null}";
             var o = JsonConvert.DeserializeObject<DwollaCheckoutResponse>(json);
 
-            o.Result.Should().Be( DwollaCheckoutResponseResult.Success );
-            o.CheckoutId.Should().Be( "C3D4DC4F-5074-44CA-8639-B679D0A70803" );
-            o.Message.Should().BeNull();
+            o.Success.Should().BeTrue();
+            o.CheckoutId.Should().Be("43957894-d8fa-41dc-a75d-c21c4ce9dcc9");
+            o.Message.Should().Be("Success");
         }
         
         [Test]
         public void can_deseralize_failed_checkout_response()
         {
-            var json = @"
-{
-    'Result': 'Failure',
-    'Message': 'Invalid total.'
-}";
+            var json = @"{""Success"":false,""Message"":""Application or purchase order does not have a payment redirect URL associated with it. Please submit an application details change request or provide a redirect URL."",""Response"":null,""_links"":null}";
             var o = JsonConvert.DeserializeObject<DwollaCheckoutResponse>(json);
 
-            o.Result.Should().Be(DwollaCheckoutResponseResult.Failure);
+            o.Success.Should().BeFalse();
             o.CheckoutId.Should().BeNull();
-            o.Message.Should().Be( "Invalid total." );
+            o.Message.Should().Be("Application or purchase order does not have a payment redirect URL associated with it. Please submit an application details change request or provide a redirect URL.");
         }
 
         [Test]

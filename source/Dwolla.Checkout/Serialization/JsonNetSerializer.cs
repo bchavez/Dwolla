@@ -1,22 +1,17 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using RestSharp;
+using RestSharp.Deserializers;
 using RestSharp.Serializers;
 
 namespace Dwolla.Checkout.Serialization
 {
-    public class JsonNetSerializer : ISerializer
+    public class JsonNetSerializer : ISerializer, IDeserializer
     {
         /// <summary>
         /// Default serializer
         /// </summary>
         public JsonNetSerializer()
-        {
-            ContentType = "application/json";
-        }
-
-        /// <summary>
-        /// Default serializer with overload for allowing custom Json.NET settings
-        /// </summary>
-        public JsonNetSerializer( Newtonsoft.Json.JsonSerializer serializer )
         {
             ContentType = "application/json";
         }
@@ -28,8 +23,16 @@ namespace Dwolla.Checkout.Serialization
         /// <returns>JSON as String</returns>
         public string Serialize( object obj )
         {
-            return JsonConvert.SerializeObject( obj );
+            return JsonConvert.SerializeObject( obj, this.RequestJsonSettings );
         }
+        
+
+        public JsonSerializerSettings RequestJsonSettings { get; set; } = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+        public JsonSerializerSettings ResponseJsonSettings { get; set; } = new JsonSerializerSettings();
 
         /// <summary>
         /// Unused for JSON Serialization
@@ -50,5 +53,10 @@ namespace Dwolla.Checkout.Serialization
         /// Content type for serialized content
         /// </summary>
         public string ContentType { get; set; }
+
+        public T Deserialize<T>(IRestResponse response)
+        {
+            return JsonConvert.DeserializeObject<T>(response.Content, this.ResponseJsonSettings);
+        }
     }
 }

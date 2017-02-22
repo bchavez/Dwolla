@@ -1,10 +1,6 @@
-## v1.0.2
+## v1.0.3
 * Fixed bug in `WebProxy` and RestSharp.
-
-## v1.0.1
 * Allow `WebProxy` for easier HTTP debugging.
-
-## v1.0.0
 * Updated dependencies.
 * Added `DwollaRedirect.ErrorDescription`
 * Changed `DwollaRedirect.ClearingDate` type to `string`

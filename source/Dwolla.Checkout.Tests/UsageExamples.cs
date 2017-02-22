@@ -15,26 +15,26 @@ namespace Dwolla.Checkout.Tests
 
             //Create a checkout request
             var checkoutRequest = new DwollaCheckoutRequest
-                                      {
-                                          OrderId = "MyOrderTest",
-                                          PurchaseOrder = new DwollaPurchaseOrder
-                                                              {
-                                                                  OrderItems =
-                                                                      {
-                                                                          new DwollaOrderItem
-                                                                              ( name: "Candy Bar",
-                                                                                price: 25.00m,
-                                                                                quantity: 1 )
-                                                                              {
-                                                                                  Description = "Expensive Candy Bar",
-                                                                              }
-                                                                      },
-                                                                  DestinationId = "812-111-1111",
-                                                              },
+                {
+                    OrderId = "MyOrderTest",
+                    PurchaseOrder = new DwollaPurchaseOrder
+                        {
+                            OrderItems =
+                                {
+                                    new DwollaOrderItem
+                                    (name: "Candy Bar",
+                                        price: 25.00m,
+                                        quantity: 1)
+                                        {
+                                            Description = "Expensive Candy Bar",
+                                        }
+                                },
+                            DestinationId = "812-111-1111",
+                        },
 
-                                          Callback = new Uri( "http://www.example.com/order-callback" )
+                    Callback = new Uri("http://www.example.com/order-callback")
 
-                                      };
+                };
             
             //Optional: Validate your checkout request before
             //          sending the request to Dwolla.
@@ -44,19 +44,20 @@ namespace Dwolla.Checkout.Tests
             {
                 //Check preflightCheck.Errors for a list of validation errors.
             }
-            
-            //Send the request to Dwolla.
-            var checkoutResponse = api.SendCheckoutRequest( checkoutRequest );
 
-            if( checkoutResponse.Result == DwollaCheckoutResponseResult.Failure )
+            //Send the request to Dwolla.
+            var checkoutResponse = api.SendCheckoutRequest(checkoutRequest);
+
+            if (!checkoutResponse.Success)
             {
                 //Handle Error
             }
-            else if( checkoutResponse.Result == DwollaCheckoutResponseResult.Success)
+            else if (checkoutResponse.Success)
             {
-                var redirectUrl = api.GetCheckoutRedirectUrl( checkoutResponse );
+                var redirectUrl = checkoutResponse.GetRedirectUrl();
                 //Send HTTP Redirect to browser so the 
                 //customer can finish the checkout process
+                Console.WriteLine(redirectUrl);
             }
         }
 
