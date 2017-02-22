@@ -67,8 +67,10 @@ namespace Dwolla.Checkout.Tests
         public void can_seralize_valid_checkout_request()
         {
             var expected = @"{
-  ""Key"": null,
-  ""Secret"": null,
+  ""client_id"": null,
+  ""client_secret"": null,
+  ""AssumeCosts"": false,
+  ""CheckoutWithApi"": false,
   ""Callback"": ""http://www.example.com/order-callback"",
   ""Redirect"": null,
   ""AllowGuestCheckout"": false,
@@ -91,8 +93,11 @@ namespace Dwolla.Checkout.Tests
         ""Quantity"": 1
       }
     ],
-    ""Notes"": null
-  }
+    ""Notes"": null,
+    ""Metadata"": {}
+  },
+  ""ProfileId"": null,
+  ""AdditionalFundingSources"": null
 }";
 
             var checkoutRequest = new DwollaCheckoutRequest

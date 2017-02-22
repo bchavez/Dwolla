@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace Dwolla.Checkout
 {
@@ -36,10 +37,13 @@ namespace Dwolla.Checkout
         public string Signature { get; set; }
 
         /// <summary>Date and time in which the funds are to be cleared into the destination account.</summary>
-        public DateTime ClearingDate { get; set; }
+        public string ClearingDate { get; set; }
 
         /// <summary>Status of the checkout session. Possible values: Completed, and Failed.</summary>
         public DwollaStatus Status { get; set; }
+
+        /// <summary>Error description if there was one.</summary>
+        public string Error_Description { get; set; }
     }
 
     /// <summary>
