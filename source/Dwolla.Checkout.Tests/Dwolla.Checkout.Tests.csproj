@@ -105,7 +105,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTest.cs" />
     <Compile Include="JsonSerializationTests.cs" />
     <Compile Include="MvcMockHelpers.cs" />
     <Compile Include="RedirectDeseralizationTest.cs" />
