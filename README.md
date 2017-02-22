@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ctkvbvvufolnhsjp?svg=true)](https://ci.appveyor.com/project/bchavez/dwolla)
+
 Dwolla .NET/C# Library
 ======================
 ----------------------
