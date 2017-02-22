@@ -22,8 +22,9 @@ namespace Dwolla.Checkout
         /// <summary>Dwolla application secret</summary>
         public virtual string AppSecret { get; set; }
 
-        public const string RequestUrl = "https://www.dwolla.com/oauth/rest/offsitegateway/checkouts";
-        public const string CheckoutUrl = "https://www.dwolla.com/payment/checkout/{CheckoutId}";
+        public const string BaseUrl = "https://www.dwolla.com";
+        public const string RequestUrl = "/oauth/rest/offsitegateway/checkouts";
+        public static readonly string CheckoutUrl = $"{BaseUrl}/payment/checkout/{{CheckoutId}}";
 
         /// <summary>
         /// This constructor will retrieve <b>AppKey</b> and <b>AppSecret</b> from your web.config/appSettings location.
@@ -56,7 +57,7 @@ namespace Dwolla.Checkout
             this.AppSecret = !string.IsNullOrEmpty(appSecret) ? appSecret : ConfigurationManager.AppSettings[DwollaSecret];
 
             this.ValidatorFactory = new AttributedValidatorFactory();
-
+            
             this.ValidatorFactory.GetValidator<DwollaServerCheckoutApi>()
                 .ValidateAndThrow( this );
         }
@@ -86,7 +87,7 @@ namespace Dwolla.Checkout
         /// <summary>Executes the Dwolla Checkout REST Request. This method can be overridden if you wish to use a different REST library to execute the actual request. </summary>
         protected virtual DwollaCheckoutResponse ExecuteRestRequest( DwollaCheckoutRequest checkoutRequest)
         {
-            var client = new RestClient()
+            var client = new RestClient(BaseUrl)
                 {
                     Proxy = this.proxy
                 };

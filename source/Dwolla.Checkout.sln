@@ -5,17 +5,18 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Tests.Web", "Dwolla.Tests.Web\Dwolla.Tests.Web.csproj", "{4CD39CBB-8570-45F8-81DC-0B83F7A042EF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{10A86C22-9C19-42C5-B36A-3A436EA00D8F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\Dwolla.Checkout.nuspec = .nuget\Dwolla.Checkout.nuspec
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Checkout", "Dwolla.Checkout\Dwolla.Checkout.csproj", "{78C02010-859C-4B67-9E9C-5D6E39682B9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dwolla.Checkout.Tests", "Dwolla.Checkout.Tests\Dwolla.Checkout.Tests.csproj", "{6FE971E2-9F21-4918-A6D4-ABFF3729C35F}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Builder", "Builder\Builder.fsproj", "{2E878DDF-5585-48F2-85E0-748579278C9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{6332DE04-9B28-43E8-BEA0-E36FAB1BE3D5}"
+	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+		..\HISTORY.md = ..\HISTORY.md
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

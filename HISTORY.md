@@ -1,3 +1,6 @@
+## v1.0.2
+* Fixed bug in `WebProxy` and RestSharp.
+
 ## v1.0.1
 * Allow `WebProxy` for easier HTTP debugging.
 

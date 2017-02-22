@@ -166,3 +166,4 @@ $RECYCLE.BIN/
 .DS_Store
 /nuget.push.bat
 
+/source/Dwolla.Tests.Web
