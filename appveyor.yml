@@ -19,9 +19,9 @@ test_script:
 
 
 artifacts:
-  - path: __package\*.nupkg
+  - path: source\__package\*.nupkg
     name: NuGet
-  - path: __package\*.zip
+  - path: source\__package\*.zip
     name: Zip
 
 
@@ -32,7 +32,7 @@ deploy:
     - provider: GitHub
       release: 'Release $(APPVEYOR_REPO_TAG_NAME) build $(APPVEYOR_BUILD_VERSION)'
       tag: $(APPVEYOR_REPO_TAG_NAME)
-      description: '[**CHANGE LOG**](https://github.com/bchavez/Bogus/blob/master/HISTORY.md)'
+      description: '[**CHANGE LOG**](https://github.com/bchavez/Dwolla/blob/master/HISTORY.md)'
       prerelease: $(IsPreRelease)
       artifact: Zip, NuGet
       auth_token:
