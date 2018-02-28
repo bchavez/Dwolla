@@ -21,13 +21,13 @@ namespace Dwolla.Checkout.Tests.ValidationTests
         public void should_throw_with_null_api_key()
         {
             new Action( () => new DwollaServerCheckoutApi( null, "secret") )
-                .ShouldThrow<ValidationException>();
+                .ShouldThrow<ArgumentException>();
         }
         [Test]
         public void should_throw_with_null_api_secret()
         {
             new Action( () => new DwollaServerCheckoutApi( "key", null) )
-                .ShouldThrow<ValidationException>();
+                .ShouldThrow<ArgumentException>();
         }
     }
 }
