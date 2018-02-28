@@ -1,3 +1,6 @@
+## v2.0.1
+* Move to **.NET Standard 2** and **.NET Framework 4.5.2**.
+
 ## v1.0.3
 * Fixed bug in `WebProxy` and RestSharp.
 * Allow `WebProxy` for easier HTTP debugging.
