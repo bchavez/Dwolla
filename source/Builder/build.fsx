@@ -56,10 +56,22 @@ Target "msb" (fun _ ->
 
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
+     let lookIn = Folders.Lib @@ "build"
+     let toolPath = findToolInSubPath "NuGet.exe" lookIn
+
+     tracefn "NuGet Tool Path: %s" toolPath
+
      Projects.SolutionFile
      |> RestoreMSSolutionPackages (fun p ->
-            { p with OutputPath = (Folders.Source @@ "packages" )}
+            { 
+              p with 
+                OutputPath = (Folders.Source @@ "packages" )
+                ToolPath = toolPath
+            }
         )
+
+     trace ".NET Core Restore"
+     Dotnet DotnetCommands.Restore DwollaProject.Folder
  )
 
 Target "nuget" (fun _ ->
