@@ -1,91 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{78C02010-859C-4B67-9E9C-5D6E39682B9C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dwolla.Checkout</RootNamespace>
-    <AssemblyName>Dwolla.Checkout</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Dwolla.Checkout.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Dwolla.Checkout.XML</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\portable-net40+sl50+wp80+win8+wpa81\FluentValidation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="DwollaCallback.cs" />
-    <Compile Include="DwollaCheckoutRequest.cs" />
-    <Compile Include="DwollaCheckoutResponse.cs" />
-    <Compile Include="DwollaCustomerInfo.cs" />
-    <Compile Include="DwollaOrderItem.cs" />
-    <Compile Include="DwollaPurchaseOrder.cs" />
-    <Compile Include="DwollaRedirect.cs" />
-    <Compile Include="DwollaServerCheckoutApi.cs" />
-    <Compile Include="DwollaSignatureUtil.cs" />
-    <Compile Include="Validators\DwollaCheckoutRequestValidator.cs" />
-    <Compile Include="Validators\DwollaCustomerInfoValidator.cs" />
-    <Compile Include="Validators\DwollaOrderItemValidator.cs" />
-    <Compile Include="Validators\DwollaPurchaseOrderValidator.cs" />
-    <Compile Include="Validators\DwollaServerCheckoutApiValidator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\DwollaCheckoutResponseValidator.cs" />
-    <Compile Include="Serialization\ExtensionsForRestClient.cs" />
-    <Compile Include="Serialization\JsonNetSerializer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup>
+      <Description>A .NET implementation for the Dwolla Checkout (off-site gateway) API for online payments. The Off-Site Gateway API is a way to seamlessly pay for goods or services online utilizing Dwolla's low-cost payment processing platform.</Description>
+      <PackageReleaseNotes>
+      </PackageReleaseNotes>
+      <Version>0.0.0-localbuild</Version>
+      <Authors>Brian Chavez</Authors>
+      <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+      <LangVersion>latest</LangVersion>
+      <CodeAnalysisRuleSet>Default.ruleset</CodeAnalysisRuleSet>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <AssemblyOriginatorKeyFile>
+      </AssemblyOriginatorKeyFile>
+      <SignAssembly>false</SignAssembly>
+      <AssemblyName>Dwolla.Checkout</AssemblyName>
+      <PackageId>Dwolla.Checkout</PackageId>
+      <PackageTags>dwolla;api;payment;money;ach;fisync;merchant;checkout;cart;gateway;offsite;bank</PackageTags>
+      <PackageIconUrl>https://raw.github.com/bchavez/Dwolla/master/source/Dwolla.Checkout/Dwolla.Checkout.png</PackageIconUrl>
+      <PackageProjectUrl>https://github.com/bchavez/Dwolla</PackageProjectUrl>
+      <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Dwolla/master/LICENSE</PackageLicenseUrl>
+      <RepositoryType>git</RepositoryType>
+      <RepositoryUrl>https://github.com/bchavez/Dwolla</RepositoryUrl>
+      <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+      <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+      <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+      <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+      <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+      <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+      <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+      <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+      <DefineConstants>$(DefineConstants);STANDARD;STANDARD20</DefineConstants>
+   </PropertyGroup>
+   <ItemGroup>
+      <EmbeddedResource Include="data\*.locale.bson" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+   </ItemGroup>
+   <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="7.5.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+      <PackageReference Include="RestSharp" Version="106.1.0" />
+      <PackageReference Include="Roslynator.Analyzers" Version="1.5.0" PrivateAssets="All" />
+   </ItemGroup>
+   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+      <Reference Include="System" />
+      <Reference Include="Microsoft.CSharp" />
+   </ItemGroup>
 </Project>

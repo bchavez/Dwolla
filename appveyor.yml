@@ -1,4 +1,5 @@
 version: '{build}'
+image: Visual Studio 2017
 
 skip_commits:
   message: /(//skip\W*ci)|(read\W*me)/

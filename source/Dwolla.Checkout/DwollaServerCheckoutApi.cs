@@ -26,26 +26,6 @@ namespace Dwolla.Checkout
         public const string RequestUrl = "/oauth/rest/offsitegateway/checkouts";
         public static readonly string CheckoutUrl = $"{BaseUrl}/payment/checkout/{{CheckoutId}}";
 
-        /// <summary>
-        /// This constructor will retrieve <b>AppKey</b> and <b>AppSecret</b> from your web.config/appSettings location.
-        /// AppKey = AppSettings["dwolla_key"] (required),
-        /// AppSecret = AppSettings["dwolla_secret"] (required),
-        /// TestMode = AppSettings["dwolla_testmode"] (optional) default false.
-        /// </summary>
-        /// <example>
-        ///   &lt;appSettings&gt;
-        ///      &lt;add key="dwolla_key" value="...key..."/&gt;
-        ///      &lt;add key="dwolla_secret" value="...secret..."/&gt;
-        ///      &lt;add key="dwolla_testmode" value="true|false"/&gt;
-        ///   &lt;appSettings&gt;
-        /// </example>
-        public DwollaServerCheckoutApi() : this( 
-            ConfigurationManager.AppSettings[DwollaKey],
-            ConfigurationManager.AppSettings[DwollaSecret],
-            Convert.ToBoolean( ConfigurationManager.AppSettings["dwolla_testmode"] ?? "false" ) )
-        {
-        }
-
         private const string DwollaKey = "dwolla_key";
         private const string DwollaSecret = "dwolla_secret";
 
@@ -53,8 +33,13 @@ namespace Dwolla.Checkout
         {
             this.Proxy = proxy;
             this.TestMode = testMode;
-            this.AppKey = !string.IsNullOrWhiteSpace(appKey) ? appKey : ConfigurationManager.AppSettings[DwollaKey];
-            this.AppSecret = !string.IsNullOrEmpty(appSecret) ? appSecret : ConfigurationManager.AppSettings[DwollaSecret];
+           this.AppKey = !string.IsNullOrWhiteSpace(appKey)
+              ? appKey
+              : throw new ArgumentException($"The {nameof(appKey)} is null or blank. The {nameof(appKey)} must be specified.");
+
+           this.AppSecret = !string.IsNullOrEmpty(appSecret)
+              ? appSecret
+              : throw new ArgumentException($"The {nameof(appSecret)} is null or blank. The {nameof(appSecret)} must be specified.");
 
             this.ValidatorFactory = new AttributedValidatorFactory();
             
