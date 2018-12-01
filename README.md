@@ -1,3 +1,8 @@
+# THIS PROJECT IS OBSOLETE
+## This project is now obsolete. Please use the offical Dwolla C# Client here: https://github.com/Dwolla/dwolla-v2-csharp
+
+-----
+
 [![Build status](https://ci.appveyor.com/api/projects/status/ctkvbvvufolnhsjp?svg=true)](https://ci.appveyor.com/project/bchavez/dwolla)
 
 Dwolla .NET/C# Library
